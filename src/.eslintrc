@@ -2,7 +2,7 @@
     "parser": "babel-eslint",
     "extends": ["airbnb"],
     "rules": {
-        "indent": ["error", 4],
+        "indent": ["warn", 4],
         "no-plusplus": "off",
         "no-console": "off"
     }

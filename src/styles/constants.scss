@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+// fonts
+$primary-font: 'Montserrat', sans-serif;
+
+// color codes
+$color-primary: #3C444D;
+$color-primary-light: #CBCFD4;
+$color-cases: #53B9EA;
+$color-recovered: #50E3C2;
+$color-deaths: #E3507A;
+
+// ui colors
+$sections-background: mix($color-primary, transparent, 80%);
+$content-background: $color-primary;
+$main-font-color: $color-primary-light;
+$headers-color: white;
+$main-border-color: mix($color-primary, $color-primary-light, 50%);
+
+// ui size
+$base-padding-size: 10px;
+$footer-height: 50px;
+
+// mixins
+$default-border: 1px solid $main-border-color;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -14,8 +14,8 @@
  */
 const getTemplate = () => `
   <div class="dashboard__column dashboard__column--widget-column">
-    <section class="dashboard__section dashboard__header"><h1>Covid-2019 dashboard</h1></section>
-    <section class="dashboard__section">
+    <section class="dashboard__section dashboard__header"><h1 class="widget-title">Covid-2019 dashboard</h1></section>
+    <section class="dashboard__section dashboard__section--grow">
       <search-field class="search-form">Placeholder?</search-field>
       <countries-list class="countries-list">
         <countries-list-item class="countries-list__item" flag="./flag icon url" name="USA">16135597</countries-list-item>
@@ -52,20 +52,22 @@ const getTemplate = () => `
   <div class="dashboard__column dashboard__column--widget-column">
     <section class="dashboard__section">
       <h2 class="widget-title">Worldwide</h2>
-      <table class="widget-table">
-        <tr>
-          <td>Cases</td>
-          <td>71986171</td>
-        </tr>
-        <tr>
-          <td>Recovered</td>
-          <td>47022409</td>
-        </tr>
-        <tr>
-          <td>Deaths</td>
-          <td>1609413</td>
-        </tr>
-      </table>
+      <div class="table-container">
+        <table class="widget-table">
+          <tr>
+            <td>Cases</td>
+            <td class="cases">71986171</td>
+          </tr>
+          <tr>
+            <td>Recovered</td>
+            <td class="recovered">47022409</td>
+          </tr>
+          <tr>
+            <td>Deaths</td>
+            <td class="deaths">1609413</td>
+          </tr>
+        </table>
+      </div>
       <toggle-group class="toggle-group">
         <toggle-button class="toggle-group__button" active="true">Today / All time</toggle-button>
         <toggle-button>Total / p 100k</toggle-button>

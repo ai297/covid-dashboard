@@ -1,5 +1,38 @@
+@import './constants.scss';
+
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     &:active, &:focus { outline: none; }
 }
+
+html {
+  font-family: $primary-font;
+  font-size: 14px;
+  color: $main-font-color;
+}
+
+body {
+  background-color: $color-primary;
+}
+
+main {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+footer {
+  position: relative;
+  height: $footer-height;
+  margin-top: -$footer-height;
+  @include flex-center;
+  background-color: $content-background;
+  z-index: 2;
+}
+
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.5rem; }
+
+@import './dashboard.scss';

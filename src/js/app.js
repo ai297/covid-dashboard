@@ -1,15 +1,15 @@
-import AppMain from './app-main';
+import getTemplate from './app-template';
+// import DataService from './data-service';
 
 class App {
-    mount(element) {
-        this.element = element;
-        this.render();
-    }
+  mount(element) {
+    this.element = element;
+    this.render();
+  }
 
-    render() {
-        this.element.innerHTML = 'Hello world';
-    }
+  render() {
+    this.element.innerHTML = getTemplate();
+  }
 }
 
-customElements.define('app-main', AppMain);
 export default App;

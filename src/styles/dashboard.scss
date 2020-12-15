@@ -1,0 +1,86 @@
+@import './constants.scss';
+
+.dashboard {
+  display: flex;
+  background-color: brown;
+
+  &__column {
+    position: relative;
+    padding: $base-padding-size;
+    padding-bottom: $footer-height + $base-padding-size;
+    display: flex;
+    flex-direction: column;
+
+    &--widget-column {
+      min-width: 20rem;
+      max-width: 30rem;
+      flex: 0 1 25%;
+      z-index: 2;
+    }
+
+    &--map-column {
+      flex: 1 0 auto;
+      z-index: 1;
+    }
+  }
+
+  &__section {
+    position: relative;
+    margin-top: 20px;
+    padding: $base-padding-size;
+    border-radius: .75rem;
+    background-color: $sections-background;
+
+    &--grow {
+      flex-grow: 1;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.cases, .recovered, .deaths { font-weight: bold; }
+.cases { color: $color-cases; }
+.recovered { color: $color-recovered; }
+.deaths { color: $color-deaths; }
+
+.widget-title {
+  color: $headers-color;
+  letter-spacing: .06em;
+  text-align: center;
+}
+
+.table-container {
+  margin: $base-padding-size 0;
+  padding: $base-padding-size / 2;
+  border: $default-border;
+  border-radius: .5rem;
+  background-color: $content-background;
+}
+.widget-table {
+  width: 100%;
+  font-size: 1.3rem;
+  border-collapse: collapse;
+
+  tr:not(:last-child) > td { border-bottom: $default-border; }
+
+  td {
+    padding: $base-padding-size / 2;
+    line-height: 2rem;
+    white-space: nowrap;
+
+    &:first-child { width: 55%; }
+    &:not(:last-child) { border-right: $default-border; }
+    &:last-child { text-align: center; }
+  }
+}
+
+.map-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: $footer-height + $base-padding-size;
+  @include flex-center;
+}

@@ -1,5 +1,4 @@
 import './styles/style.scss';
 import App from './js/app';
 
-const app = new App();
-app.mount(document.body);
+new App().mount(document.querySelector('#dashboard-app'));

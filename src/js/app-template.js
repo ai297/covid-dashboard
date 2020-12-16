@@ -21,10 +21,10 @@ const getTemplate = () => `
         <countries-list-item class="countries-list__item" flag="./flag icon url" name="USA">16135597</countries-list-item>
         <countries-list-item class="countries-list__item" flag="./flag icon url" name="Russia">2629699</countries-list-item>
       </countries-list>
-      <tabs-group class="tabs-group">
-        <tabs-button class="tabs-group__button" selected="true">Cases</tabs-button>
-        <tabs-button class="tabs-group__button">Recovered</tabs-button>
-        <tabs-button class="tabs-group__button">Deaths</tabs-button>
+      <tabs-group class="tabs-group" name="tabs-group-1">
+        <label is="tab-button" class="tabs-group__button" selected="true">Cases</label>
+        <label is="tab-button" class="tabs-group__button">Recovered</label>
+        <label is="tab-button" class="tabs-group__button">Deaths</label>
       </tabs-group>
       <toggle-group class="toggle-group">
         <toggle-button class="toggle-group__button" active="true">Today / All time</toggle-button>
@@ -38,10 +38,10 @@ const getTemplate = () => `
   <div class="dashboard__column dashboard__column--map-column">
     <section class="map-section"></section>
     <section class="map-controls">
-      <tabs-group class="tabs-group">
-        <tabs-button class="tabs-group__button" selected="true">Cases</tabs-button>
-        <tabs-button class="tabs-group__button">Recovered</tabs-button>
-        <tabs-button class="tabs-group__button">Deaths</tabs-button>
+      <tabs-group class="tabs-group" name="tabs-group-2">
+        <label is="tab-button" class="tabs-group__button" selected="true">Cases</label>
+        <label is="tab-button" class="tabs-group__button">Recovered</label>
+        <label is="tab-button" class="tabs-group__button">Deaths</label>
       </tabs-group>
       <toggle-group class="toggle-group">
         <toggle-button class="toggle-group__button" active="true">Today / All time</toggle-button>

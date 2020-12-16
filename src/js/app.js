@@ -1,4 +1,6 @@
 import getTemplate from './app-template';
+import TabButton from './tab-button';
+import TabsGroup from './tabs-group';
 // import DataService from './data-service';
 
 class App {
@@ -12,4 +14,6 @@ class App {
   }
 }
 
+window.customElements.define('tab-button', TabButton, { extends: 'label' });
+window.customElements.define('tabs-group', TabsGroup);
 export default App;

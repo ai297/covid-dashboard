@@ -3,7 +3,7 @@
  * Используемые кастомные теги (web components)
  * (можно переименовать или что-то ещё выделить в компоненты)
  * @example
- * search-field
+ * search-form
  * countries-list
  * countries-list-item
  * tabs-group
@@ -16,7 +16,7 @@ const getTemplate = () => `
   <div class="dashboard__column dashboard__column--widget-column">
     <section class="dashboard__section dashboard__header"><h1 class="widget-title">Covid-2019 dashboard</h1></section>
     <section class="dashboard__section dashboard__section--grow">
-      <search-field class="search-form">Placeholder?</search-field>
+      <search-form class="search-form" placeholder="Select country"></search-form>
       <div class="widget-container widget-container--grow">
         <div class="widget-container__scroll custom-scrollbar">
           <countries-list class="countries-list">

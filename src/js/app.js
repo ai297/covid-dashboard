@@ -1,5 +1,6 @@
 import getTemplate from './app-template';
 // import DataService from './data-service';
+import SearchForm from './search-form';
 
 class App {
   mount(element) {
@@ -12,4 +13,5 @@ class App {
   }
 }
 
+window.customElements.define('search-form', SearchForm);
 export default App;

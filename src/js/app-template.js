@@ -3,7 +3,7 @@
  * Используемые кастомные теги (web components)
  * (можно переименовать или что-то ещё выделить в компоненты)
  * @example
- * search-form
+ * search-form +
  * countries-list
  * countries-list-item
  * tabs-group

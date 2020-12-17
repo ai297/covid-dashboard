@@ -1,10 +1,14 @@
 import getTemplate from './app-template';
 import TabButton from './tab-button';
 import TabsGroup from './tabs-group';
-// import DataService from './data-service';
 import SearchForm from './search-form';
+import DataService from './data-service';
 
 class App {
+  constructor() {
+    this.dataService = new DataService();
+  }
+
   mount(element) {
     this.element = element;
     this.render();

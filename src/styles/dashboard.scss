@@ -2,14 +2,12 @@
 
 .dashboard {
   display: flex;
-  background-color: brown;
 
   &__column {
     position: relative;
     padding: $base-padding-size;
     padding-bottom: $footer-height + $base-padding-size;
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
 
     &--widget-column {
       min-width: 20rem;
@@ -19,6 +17,8 @@
     }
 
     &--map-column {
+      align-items: center;
+      justify-content: flex-end;
       flex: 1 0 auto;
       z-index: 1;
     }
@@ -28,12 +28,11 @@
     position: relative;
     margin-top: 20px;
     padding: $base-padding-size;
+    @include flex-column;
     border-radius: .75rem;
     background-color: $sections-background;
 
-    &--grow {
-      flex-grow: 1;
-    }
+    &--grow { flex-grow: 1; }
 
     p {
       text-align: center;
@@ -46,19 +45,29 @@
 .recovered { color: $color-recovered; }
 .deaths { color: $color-deaths; }
 
-.widget-title {
-  color: $headers-color;
-  letter-spacing: .06em;
-  text-align: center;
-}
+.widget-title { text-align: center; }
 
-.table-container {
+.widget-container {
+  position: relative;
   margin: $base-padding-size 0;
   padding: $base-padding-size / 2;
   border: $default-border;
   border-radius: .5rem;
   background-color: $content-background;
+
+  &--grow { flex-grow: 1; }
+
+  &__scroll {
+    position: absolute;
+    left: $base-padding-size / 2;
+    right: $base-padding-size / 2;
+    top: $base-padding-size / 2;
+    bottom: $base-padding-size / 2;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
 }
+
 .widget-table {
   width: 100%;
   font-size: 1.3rem;
@@ -77,10 +86,23 @@
   }
 }
 
-.map-controls {
-  position: absolute;
+.map-section {
+  position: fixed;
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: $footer-height + $base-padding-size;
+  flex: 1 1 auto;
+  width: 100%;
+
+  // временно
+  background-color: darkslateblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-controls {
+  //bottom: $footer-height + $base-padding-size;
   @include flex-center;
 }

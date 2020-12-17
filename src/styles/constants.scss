@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap');
 
 // fonts
 $primary-font: 'Montserrat', sans-serif;
+$headers-font: 'Barlow Condensed', sans-serif;
 
 // color codes
+$color-primary-dark: #15171B;
 $color-primary: #3C444D;
 $color-primary-light: #CBCFD4;
 $color-cases: #53B9EA;
@@ -14,6 +17,7 @@ $color-deaths: #E3507A;
 $sections-background: mix($color-primary, transparent, 80%);
 $content-background: $color-primary;
 $main-font-color: $color-primary-light;
+$dark-font-color: mix($color-primary, $color-primary-light, 60%);
 $headers-color: white;
 $main-border-color: mix($color-primary, $color-primary-light, 50%);
 
@@ -29,4 +33,10 @@ $light-border: 1px solid $color-primary-light;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

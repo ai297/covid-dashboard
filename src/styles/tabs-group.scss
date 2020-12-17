@@ -1,0 +1,40 @@
+@import './constants.scss';
+
+.tabs-group {
+  display: block;
+  
+  .tabs-group__button {
+
+    input {
+      display: none;
+    }
+
+    div {
+      display: inline-block;
+      margin: 0 -2px;
+      padding: 5px 12px;
+      cursor: pointer;
+      color: $color-primary;
+      background-color: $color-primary-light;
+      background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+      border: $light-border;
+      transition: all .1s ease-in;
+    }
+    
+    input:checked ~ div {
+      background-image: none;
+      outline: 0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+      background-color:#e0e0e0;
+      transition: all .1s ease-in;
+    }
+
+    &:first-child div{
+      border-radius: 20px 0 0 20px;
+    }
+  
+    &:last-child div {
+      border-radius: 0 20px 20px 0;
+    }
+  }
+}

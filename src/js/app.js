@@ -9,9 +9,25 @@ class App {
     this.dataService = new DataService();
   }
 
+  getData() {
+    return new Promise((resolve, reject) => {
+      this.dataService.getSummary().then((summary) => {
+        console.log(summary);
+        this.dataService.getDetail('Worldwide').then((detailData) => {
+          console.log(detailData);
+          resolve();
+        }).catch(reject);
+      }).catch(reject);
+    });
+  }
+
   mount(element) {
     this.element = element;
-    this.render();
+    // show loader screen
+    this.getData().then(() => {
+      // hide loader
+      this.render();
+    }).catch(() => console.log('Show error screen'));
   }
 
   render() {

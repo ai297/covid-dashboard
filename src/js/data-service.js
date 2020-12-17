@@ -130,7 +130,7 @@ class DataService {
    * detailed data and country population
    *
    * @example
-   * getDetails('Russia').then((deta) => {});
+   * getDetails('Russia').then((data) => {});
    * data.population = ...
    * data.detail = [
    *  {
@@ -156,6 +156,7 @@ class DataService {
     return new Promise((resolve, reject) => {
       this.detailLoadCallbacks.push({ resolve, reject });
       const url = COUNTRY_DETAIL_DATA_URL.replace('{country}', countryName === 'Worldwide' ? 'all' : countryName);
+      console.log(url);
       fetch(url).then((response) => {
         if (!response.ok) rejectAll(this.detailLoadCallbacks, Error(`Worldwide summary data loading error (${response.status})`));
         else {

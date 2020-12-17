@@ -1,42 +1,11 @@
+import { mapSummaryData, mapDetailData } from './data-mapping';
+
 // const SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&sort=cases';
 // const WORLDWIDE_SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=false';
 // const COUNTRY_DETAIL_DATA_URL = 'https://disease.sh/v3/covid-19/historical/{country}?lastdays=360';
 const SUMMARY_DATA_URL = './test-summary.json';
 const WORLDWIDE_SUMMARY_DATA_URL = './test-worldwide-detail.json';
 const COUNTRY_DETAIL_DATA_URL = './test-country-detail.json';
-
-function mapSummaryData(data) {
-  return {
-    country: data.country ? data.country : 'Worldwide',
-    population: data.population,
-    cases: data.cases,
-    todayCases: data.todayCases,
-    deaths: data.deaths,
-    todayDeaths: data.todayDeaths,
-    recovered: data.recovered,
-    todayRecovered: data.todayRecovered,
-    info: data.countryInfo ? {
-      flag: data.countryInfo.flag,
-      long: data.countryInfo.long,
-      lat: data.countryInfo.lat,
-    } : null,
-    updated: new Date(data.updated),
-  };
-}
-
-function mapDetailData(data) {
-  const timeline = data.timeline ? data.timeline : data;
-  const result = [];
-  Object.keys(timeline.cases).forEach((date) => {
-    result.push({
-      date,
-      cases: timeline.cases[date],
-      recovered: timeline.recovered[date],
-      deaths: timeline.deaths[date],
-    });
-  });
-  return result;
-}
 
 function resolveAll(callbacks, ...args) {
   callbacks.forEach((item) => {
@@ -131,6 +100,7 @@ class DataService {
    *
    * @example
    * getDetails('Russia').then((data) => {});
+   * data.country = ...
    * data.population = ...
    * data.detail = [
    *  {
@@ -158,7 +128,7 @@ class DataService {
       const url = COUNTRY_DETAIL_DATA_URL.replace('{country}', countryName === 'Worldwide' ? 'all' : countryName);
       console.log(url);
       fetch(url).then((response) => {
-        if (!response.ok) rejectAll(this.detailLoadCallbacks, Error(`Worldwide summary data loading error (${response.status})`));
+        if (!response.ok) rejectAll(this.detailLoadCallbacks, Error(`Country detail data loading error (${response.status})`));
         else {
           response.json().then((data) => {
             this.detail = mapDetailData(data);

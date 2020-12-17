@@ -6,6 +6,10 @@
 * https://api.covid19api.com
 * https://api.covid19api.com/summary
 
+## Alternative API:
+* For country https://disease.sh/v3/covid-19/historical/russia?lastdays=366
+* For all https://disease.sh/v3/covid-19/historical/all?lastdays=366
+
 ## UI prototype in Figma:
 * https://www.figma.com/file/13Amx4uSbMwJCzFFm1q9Ix/COVID-19-DASHBOARD?node-id=0%3A1
 

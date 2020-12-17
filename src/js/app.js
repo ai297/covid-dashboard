@@ -1,4 +1,6 @@
 import getTemplate from './app-template';
+import TabButton from './tab-button';
+import TabsGroup from './tabs-group';
 // import DataService from './data-service';
 import SearchForm from './search-form';
 
@@ -14,4 +16,7 @@ class App {
 }
 
 window.customElements.define('search-form', SearchForm);
+window.customElements.define('tab-button', TabButton, { extends: 'label' });
+window.customElements.define('tabs-group', TabsGroup);
+
 export default App;

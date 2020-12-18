@@ -14,11 +14,11 @@ class App {
 
   getData() {
     return new Promise((resolve, reject) => {
+      // load summary data for all countries and worldwide (countries-list component)
       this.dataService.getSummary().then((summary) => {
-        // load summary data for all countries and worldwide (countries-list component)
         window.dispatchEvent(new CustomEvent(EVENTS.DATA.showSummaryAll,
           { ...EVENTS.defaultSettings, detail: summary }));
-        // show summary for worldwide (rigth table)
+        // show summary for worldwide (right side table)
         window.dispatchEvent(new CustomEvent(EVENTS.DATA.showSummarySelected,
           { ...EVENTS.defaultSettings, detail: this.dataService.getSummaryFor('Worldwide') }));
         // load worldwide detail data (chart component)

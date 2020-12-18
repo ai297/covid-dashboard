@@ -1,0 +1,43 @@
+[name="period"] {
+  position: relative;
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+[name="period"] input {
+  display: none;
+}
+
+[name="period"] span {
+  margin-left: 30px;
+}
+
+[name="period"] span::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 18px;
+  border-radius: 8px;
+  background-color: #b2b6be;
+}
+
+[name="period"] span::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #000000;
+}
+
+[name="period"] input:checked + [name="period"] span::after {
+  background-color: #b11616;
+}

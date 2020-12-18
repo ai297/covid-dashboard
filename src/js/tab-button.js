@@ -1,3 +1,5 @@
+import EVENTS from './events';
+
 class TabButton extends HTMLLabelElement {
   constructor() {
     super();
@@ -10,10 +12,9 @@ class TabButton extends HTMLLabelElement {
     this.inputElement.addEventListener('change', (event) => {
       event.stopPropagation();
       if (this.inputElement.checked) {
-        window.dispatchEvent(new CustomEvent('tab-change', {
+        window.dispatchEvent(new CustomEvent(EVENTS.UI.tabChange, {
+          ...EVENTS.defaultSettings,
           detail: { name: this.inputElement.name, selected: this.inputElement.value },
-          bubbles: true,
-          composed: true,
         }));
       }
     });

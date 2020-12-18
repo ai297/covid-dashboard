@@ -23,8 +23,7 @@ class App {
           { ...EVENTS.defaultSettings, detail: this.dataService.getSummaryFor('Worldwide') }));
         // load worldwide detail data (chart component)
         this.dataService.getDetail('Worldwide').then((detailData) => {
-          window.dispatchEvent(new CustomEvent(EVENTS.DATA.showDetail,
-            { ...EVENTS.defaultSettings, detail: detailData }));
+          window.dispatchEvent(EVENTS.getShowDetailEvent(detailData));
           resolve();
         }).catch(reject);
       }).catch(reject);

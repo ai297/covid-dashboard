@@ -15,8 +15,7 @@ class CountrySection extends HTMLLIElement {
   }
 
   select() {
-    this.dispatchEvent(new CustomEvent(EVENTS.selectCountry,
-      { ...EVENTS.defaultSettings, detail: this.country }));
+    this.dispatchEvent(EVENTS.getSelectCountryEvent(this.country));
   }
 
   connectedCallback() {

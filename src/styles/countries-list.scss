@@ -1,0 +1,48 @@
+@import './constants.scss';
+
+.countries-list {
+  padding-right: $base-padding-size / 2;
+  list-style: none;
+
+  &__item {
+    position: relative;
+    padding: 2px 0;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    white-space: nowrap;
+    background-color: transparent;
+    transition: all .3s;
+    cursor: default;
+
+    & > * {
+      margin-left: $base-padding-size / 2;
+      flex: 0 0 auto;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    & > .country-flag { margin: 0; }
+
+    & > .country-name { flex: 1 1 auto; }
+
+    &:not(:last-child) {
+      border-bottom: $default-border;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 2px;
+      bottom: 2px;
+      border-radius: $default-border-radius;
+      background-color: transparent;
+      transition: all .3s;
+    }
+
+    &--selected::before, &:hover::before { background-color: mix($color-primary-light, transparent, 25%); }
+  }
+}

@@ -54,6 +54,8 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
+img { line-height: 0; }
+
 .custom-scrollbar {
   &::-webkit-scrollbar { width: .5rem; }
   &::-webkit-scrollbar-track { background-color: transparent; }
@@ -92,4 +94,5 @@ a:hover, a:focus {
 
 @import './dashboard.scss';
 @import './search-form.scss';
+@import './countries-list.scss';
 @import './tabs-group.scss';

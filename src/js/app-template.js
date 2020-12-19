@@ -19,10 +19,7 @@ const getTemplate = () => `
       <search-form class="search-form" placeholder="Select country"></search-form>
       <div class="widget-container widget-container--grow">
         <div class="widget-container__scroll custom-scrollbar">
-          <countries-list class="countries-list">
-            <countries-list-item class="countries-list__item" flag="./flag icon url" name="USA"><span class="cases">16135597</span></countries-list-item>
-            <countries-list-item class="countries-list__item" flag="./flag icon url" name="Russia"><span class="cases">2629699</span></countries-list-item>
-          </countries-list>
+          <ul is="countries-list" class="countries-list"></countries-list>
         </div>
       </div>
       <tabs-group class="tabs-group" name="tabs-group-1">

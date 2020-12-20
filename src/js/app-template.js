@@ -28,8 +28,9 @@ const getTemplate = () => `
         <label is="tab-button" class="tabs-group__button">Deaths</label>
       </tabs-group>
       <toggle-group class="toggle-group">
-        <toggle-button class="toggle-group__button" active="true">Today / All time</toggle-button>
-        <toggle-button>Total / p 100k</toggle-button>
+        <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
+        <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
+        </label>
       </toggle-group>
     </section>
     <section class="dashboard__section last-update">
@@ -70,8 +71,9 @@ const getTemplate = () => `
         </table>
       </div>
       <toggle-group class="toggle-group">
-        <toggle-button class="toggle-group__button" active="true">Today / All time</toggle-button>
-        <toggle-button>Total / p 100k</toggle-button>
+        <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
+        <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
+        </label>
       </toggle-group>
     </section>
     <section class="dashboard__section">
@@ -79,8 +81,9 @@ const getTemplate = () => `
         <app-chart class="chart">Chart will be here</app-chart>
       </div>
       <toggle-group class="toggle-group">
-        <toggle-button class="toggle-group__button" active="true">Today / All time</toggle-button>
-        <toggle-button>Total / p 100k</toggle-button>
+        <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
+        <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
+        </label>
       </toggle-group>
     </section>
   </div>

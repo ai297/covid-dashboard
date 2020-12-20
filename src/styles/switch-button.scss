@@ -1,0 +1,49 @@
+.toggle-period {
+  margin-left: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-period__label {
+  margin-left: 40px;
+  transition: all ease 0.3s;
+}
+
+.toggle-period__label::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -30%);
+  width: 60px;
+  height: 24px;
+  background-color: #b2b6be;
+  border-radius: 12px;
+  transition: all ease 0.3s;
+}
+
+.toggle-period__label::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, -30%);
+  width: 34px;
+  height: 34px;
+  background-color: #e3e6ec;
+  border-radius: 50%;
+  transition: all ease 0.3s;
+}
+
+.toggle-period__checkbox {
+  display: none;
+}
+
+.toggle-period__checkbox:checked + .toggle-period__label::after {
+  background-color: #000000;
+  transform: translate(0, -55%);
+}
+
+.toggle-period__checkbox:checked + .toggle-period__label::before {
+  background-color: #767a83;
+}

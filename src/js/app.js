@@ -1,11 +1,4 @@
-import getTemplate from './app-template';
-import TabButton from './tab-button';
-import TabsGroup from './tabs-group';
-import SearchForm from './search-form';
-import CountriesList from './countries-list';
-import CountrySection from './country-section';
 import DataService from './data-service';
-import SwitchButton from './switch-button';
 import EVENTS from './events';
 
 class App {
@@ -43,25 +36,11 @@ class App {
     });
   }
 
-  mount(element) {
-    this.element = element;
-    this.render();
-    // show loader screen
+  start() {
     this.getData().then(() => {
       // hide loader
     }).catch(console.error); // TODO: обработать ошибку загрузки данных
   }
-
-  render() {
-    this.element.innerHTML = getTemplate();
-  }
 }
-
-window.customElements.define('search-form', SearchForm);
-window.customElements.define('countries-list', CountriesList, { extends: 'ul' });
-window.customElements.define('country-section', CountrySection, { extends: 'li' });
-window.customElements.define('tab-button', TabButton, { extends: 'label' });
-window.customElements.define('tabs-group', TabsGroup);
-window.customElements.define('switch-btn', SwitchButton, { extends: 'label' });
 
 export default App;

@@ -21,7 +21,7 @@ class App {
     window.dispatchEvent(
       EVENTS.getShowSelectedEvent(this.dataService.getSummaryFor(countryName)),
     );
-    this.dataService.getDetail('Worldwide').then((detailData) => {
+    this.dataService.getDetail(countryName).then((detailData) => {
       window.dispatchEvent(EVENTS.getShowDetailEvent(detailData));
     }).catch(console.error); // TODO: обработать ошибку загрузки данных для графика
   }
@@ -58,8 +58,8 @@ class App {
 }
 
 window.customElements.define('search-form', SearchForm);
-customElements.define('test-element', CountrySection, { extends: 'li' });
 window.customElements.define('countries-list', CountriesList, { extends: 'ul' });
+window.customElements.define('country-section', CountrySection, { extends: 'li' });
 window.customElements.define('tab-button', TabButton, { extends: 'label' });
 window.customElements.define('tabs-group', TabsGroup);
 window.customElements.define('switch-btn', SwitchButton, { extends: 'label' });

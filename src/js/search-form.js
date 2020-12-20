@@ -18,19 +18,19 @@ class SearchForm extends HTMLElement {
     this.inputElement.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') this.selectHandler(event);
     });
+    window.addEventListener(EVENTS.UI.selectCountry, () => {
+      this.value = '';
+    });
   }
 
   inputHandler = (event) => {
     event.stopPropagation();
-    this.dispatchEvent(new CustomEvent(EVENTS.UI.searchInput,
-      { ...EVENTS.defaultSettings, detail: this.value }));
+    this.dispatchEvent(EVENTS.getSearchInputEvent(this.value));
   }
 
   selectHandler = (event) => {
     event.stopPropagation();
-    this.dispatchEvent(new CustomEvent(EVENTS.UI.searchSelect,
-      { ...EVENTS.defaultSettings, detail: this.value }));
-    this.clear();
+    this.dispatchEvent(EVENTS.getSearchSelectEvent(this.value));
   }
 
   get value() {

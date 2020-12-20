@@ -22,12 +22,9 @@ class CountrySection extends HTMLLIElement {
     this.append(this.flagElement, this.countryNameElement, this.valueElement);
   }
 
-  get valueType() {
-    return this.valueElement.className;
-  }
-
-  set valueType(val) {
-    this.valueElement.className = val;
+  update(value, type) {
+    this.valueElement.innerText = +value.toFixed(2) || 'No data';
+    this.valueElement.className = type;
   }
 
   get flag() {
@@ -47,11 +44,7 @@ class CountrySection extends HTMLLIElement {
   }
 
   get value() {
-    return this.valueElement.innerText;
-  }
-
-  set value(val) {
-    this.valueElement.innerText = val;
+    return Number(this.valueElement.innerText);
   }
 }
 export default CountrySection;

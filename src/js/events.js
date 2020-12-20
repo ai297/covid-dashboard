@@ -5,6 +5,7 @@ const EVENTS = {
     searchSelect: 'search-select',
     selectCountry: 'select-country',
     tabChange: 'tab-change',
+    switchChange: 'switch-change',
   },
 
   DATA: {
@@ -36,6 +37,16 @@ const EVENTS = {
   getSearchSelectEvent(value) {
     return new CustomEvent(this.UI.searchSelect,
       { ...this.defaultSettings, detail: value });
+  },
+
+  getSwitchChangeEvent(toggleName, toggleValue) {
+    return new CustomEvent(this.UI.switchChange, {
+      ...this.defaultSettings,
+      detail: {
+        name: toggleName,
+        value: toggleValue,
+      },
+    });
   },
 };
 export default EVENTS;

@@ -1,8 +1,12 @@
 class SwitchButton extends HTMLLabelElement {
   constructor() {
     super();
+
     this.span = document.createElement('span');
+    this.span.classList.add('toggle__label');
+
     this.checkbox = document.createElement('input');
+    this.checkbox.classList.add('toggle__checkbox');
     this.checkbox.addEventListener('change', (e) => {
       e.stopPropagation();
       this.handlerChange();

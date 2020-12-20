@@ -7,6 +7,7 @@ import CountrySection from './country-section';
 import DataService from './data-service';
 import SwitchButton from './switch-button';
 import EVENTS from './events';
+import MapCovid from './map-covid';
 
 class App {
   constructor() {
@@ -69,5 +70,6 @@ window.customElements.define('countries-list', CountriesList, {
 window.customElements.define('tab-button', TabButton, { extends: 'label' });
 window.customElements.define('tabs-group', TabsGroup);
 window.customElements.define('switch-btn', SwitchButton, { extends: 'label' });
+window.customElements.define('map-cov', MapCovid);
 
 export default App;

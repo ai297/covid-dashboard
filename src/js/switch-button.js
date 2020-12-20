@@ -3,16 +3,10 @@ class SwitchButton extends HTMLLabelElement {
     super();
     this.span = document.createElement('span');
     this.checkbox = document.createElement('input');
-  }
-
-  render() {
-    this.span.textContent = this.getAttribute('value-unchecked');
-    this.checkbox.setAttribute('type', 'checkbox');
     this.checkbox.addEventListener('change', (e) => {
       e.stopPropagation();
       this.handlerChange();
     });
-    this.append(this.span, this.checkbox);
   }
 
   handlerChange() {
@@ -33,10 +27,10 @@ class SwitchButton extends HTMLLabelElement {
   }
 
   connectedCallback() {
-    this.render();
+    this.span.textContent = this.getAttribute('value-unchecked');
+    this.checkbox.setAttribute('type', 'checkbox');
+    this.append(this.span, this.checkbox);
   }
 }
-
-customElements.define('switch-btn', SwitchButton, { extends: 'label' });
 
 export default SwitchButton;

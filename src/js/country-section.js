@@ -23,7 +23,7 @@ class CountrySection extends HTMLLIElement {
   }
 
   update(value, type) {
-    this.valueElement.innerText = value || 'No data';
+    this.valueElement.innerText = +value.toFixed(2) || 'No data';
     this.valueElement.className = type;
   }
 

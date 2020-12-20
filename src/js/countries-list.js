@@ -15,8 +15,24 @@ class CountriesList extends HTMLUListElement {
     });
 
     window.addEventListener(EVENTS.UI.tabChange, (event) => {
-      this.updateValues(event.detail.selected);
+      if (this.countrySections) this.updateValues(event.detail.selected);
     });
+    window.addEventListener(EVENTS.UI.switchChange, (event) => {
+      switch (event.detail.name) {
+      case 'period':
+        this.isShowAllTime = !event.detail.value;
+        break;
+      case 'amount-pacients':
+        this.isShowAbsolute = !event.detail.value;
+        break;
+      default:
+        this.isShowAllTime = true;
+        this.isShowAbsolute = true;
+        break;
+      }
+      this.updateValues(this.displayValue);
+    });
+
     window.addEventListener(EVENTS.UI.searchInput, (event) => {
       if (!event.detail) this.append(...this.countrySections);
       else this.filter(event.detail.toLowerCase());
@@ -27,30 +43,40 @@ class CountriesList extends HTMLUListElement {
     });
   }
 
-  countrySections = []
+  displayValue = 'cases';
 
-  displayValue = 'cases'
+  isShowAbsolute = true;
+
+  isShowAllTime = true;
 
   showSummary(data) {
     this.data = data;
+    this.countrySections = [];
     this.data.forEach((countryData, index) => {
       const country = new CountrySection();
       country.country = countryData.country;
-      country.update(countryData[this.displayValue], this.displayValue);
       country.className = 'countries-list__item';
       country.index = index;
       this.countrySections.push(country);
     });
-    this.sort();
+    this.updateValues(this.displayValue);
   }
 
   updateValues(valueType) {
     this.displayValue = valueType;
-    [...this.children].forEach((countrySection) => countrySection.update(
-      this.data[countrySection.index][this.displayValue],
+    this.countrySections.forEach((countrySection) => countrySection.update(
+      this.getValueFor(countrySection.index),
       this.displayValue,
     ));
     this.sort();
+  }
+
+  getValueFor(index) {
+    const todayField = `today${this.displayValue[0].toUpperCase()}${this.displayValue.slice(1)}`;
+    let value = this.isShowAllTime ? this.data[index][this.displayValue]
+      : this.data[index][todayField];
+    value = this.isShowAbsolute ? value : (100000 * (value / this.data[index].population));
+    return value;
   }
 
   selectCountry(countryName) {

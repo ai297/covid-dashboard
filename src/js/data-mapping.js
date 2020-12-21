@@ -13,7 +13,7 @@ export function mapSummaryData(data) {
       long: data.countryInfo.long,
       lat: data.countryInfo.lat,
     } : null,
-    updated: new Date(data.updated),
+    updated: data.updated,
   };
 }
 

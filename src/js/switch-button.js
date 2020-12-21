@@ -1,3 +1,5 @@
+import EVENTS from './events';
+
 class SwitchButton extends HTMLLabelElement {
   constructor() {
     super();
@@ -6,33 +8,37 @@ class SwitchButton extends HTMLLabelElement {
     this.span.classList.add('toggle__label');
 
     this.checkbox = document.createElement('input');
-    this.checkbox.classList.add('toggle__checkbox');
+    this.checkbox.setAttribute('type', 'checkbox');
     this.checkbox.addEventListener('change', (e) => {
       e.stopPropagation();
-      this.handlerChange();
+      if (!this.notDispatchEvent) {
+        this.dispatchEvent(
+          EVENTS.getSwitchChangeEvent(
+            this.getAttribute('name'),
+            this.checkbox.checked
+          )
+        );
+      }
+      this.notDispatchEvent = false;
+    });
+    window.addEventListener(EVENTS.UI.switchChange, (event) => {
+      if (event.detail.name === this.getAttribute('name'))
+        this.handlerChange(event.detail.value);
     });
   }
 
-  handlerChange() {
+  handlerChange(value) {
+    this.checkbox.checked = value;
+    this.notDispatchEvent = true;
     if (this.checkbox.checked) {
       this.span.textContent = this.getAttribute('value-checked');
     } else {
       this.span.textContent = this.getAttribute('value-unchecked');
     }
-    const customEvent = new CustomEvent('switch-change', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        name: this.getAttribute('name'),
-        value: this.checkbox.value,
-      },
-    });
-    this.dispatchEvent(customEvent);
   }
 
   connectedCallback() {
     this.span.textContent = this.getAttribute('value-unchecked');
-    this.checkbox.setAttribute('type', 'checkbox');
     this.append(this.span, this.checkbox);
   }
 }

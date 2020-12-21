@@ -1,17 +1,26 @@
-import getTemplate from './app-template';
-import TabButton from './tab-button';
-import TabsGroup from './tabs-group';
-import SearchForm from './search-form';
-import CountriesList from './countries-list';
-import CountrySection from './country-section';
 import DataService from './data-service';
-import SwitchButton from './switch-button';
 import EVENTS from './events';
 import MapCovid from './map-covid';
 
 class App {
   constructor() {
     this.dataService = new DataService();
+
+    window.addEventListener(EVENTS.UI.selectCountry, (event) => {
+      this.selectCountry(event.detail);
+    });
+  }
+
+  selectCountry(countryName) {
+    window.dispatchEvent(
+      EVENTS.getShowSelectedEvent(this.dataService.getSummaryFor(countryName))
+    );
+    this.dataService
+      .getDetail(countryName)
+      .then((detailData) => {
+        window.dispatchEvent(EVENTS.getShowDetailEvent(detailData));
+      })
+      .catch(console.error); // TODO: обработать ошибку загрузки данных для графика
   }
 
   getData() {
@@ -28,10 +37,9 @@ class App {
           );
           // show summary for worldwide (right side table)
           window.dispatchEvent(
-            new CustomEvent(EVENTS.DATA.showSummarySelected, {
-              ...EVENTS.defaultSettings,
-              detail: this.dataService.getSummaryFor('Worldwide'),
-            })
+            EVENTS.getShowSelectedEvent(
+              this.dataService.getSummaryFor('Worldwide')
+            )
           );
           // load worldwide detail data (chart component)
           this.dataService
@@ -46,30 +54,13 @@ class App {
     });
   }
 
-  mount(element) {
-    this.element = element;
-    this.render();
-    // show loader screen
+  start() {
     this.getData()
       .then(() => {
         // hide loader
       })
-      .catch(() => console.log('Show error screen'));
-  }
-
-  render() {
-    this.element.innerHTML = getTemplate();
+      .catch(console.error); // TODO: обработать ошибку загрузки данных
   }
 }
-
-window.customElements.define('search-form', SearchForm);
-customElements.define('test-element', CountrySection, { extends: 'li' });
-window.customElements.define('countries-list', CountriesList, {
-  extends: 'ul',
-});
-window.customElements.define('tab-button', TabButton, { extends: 'label' });
-window.customElements.define('tabs-group', TabsGroup);
-window.customElements.define('switch-btn', SwitchButton, { extends: 'label' });
-window.customElements.define('map-cov', MapCovid);
 
 export default App;

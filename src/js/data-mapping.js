@@ -17,6 +17,12 @@ export function mapSummaryData(data) {
   };
 }
 
+/* eslint-disable */
+export function filterSummaryData(data) {
+  return data.filter((country) => country.countryInfo && country.countryInfo._id);
+}
+/* eslint-enable */
+
 export function mapDetailData(data) {
   const timeline = data.timeline ? data.timeline : data;
   const result = [];

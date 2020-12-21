@@ -25,9 +25,8 @@ class AppChart extends HTMLElement {
     this.createChart();
     window.addEventListener(EVENTS.DATA.showDetail, (event) => {
       this.countryName = event.detail.country;
-      this.countryPopulation = event.detail.population;
+      this.population = event.detail.population;
       this.cumulativeData = event.detail.detail;
-      console.log(this.cumulativeData);
       this.updateChart();
     });
 
@@ -99,10 +98,10 @@ class AppChart extends HTMLElement {
     let chartData = this.isShowAllTime
       ? this.cumulativeData
       : getDailyData(this.cumulativeData);
-    chartData = chartData.map((elem) => ({ x: Date.parse(elem.date), y: elem[this.displayValue] }));
+    chartData = chartData.map((el) => ({ x: Date.parse(el.date), y: el[this.displayValue] }));
     chartData = this.isShowAbsolute
       ? chartData
-      : chartData.map((elem) => (100000 * (elem[this.displayValue] / this.countryPopulation)));
+      : chartData.map((el) => ({ x: el.x, y: Math.round(100000 * (el.y / this.population)) }));
     return chartData;
   }
 }

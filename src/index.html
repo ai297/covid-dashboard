@@ -18,9 +18,9 @@
             </div>
           </div>
           <tabs-group class="tabs-group" name="tabs-group-1">
-            <label is="tab-button" class="tabs-group__button" selected="true">Cases</label>
-            <label is="tab-button" class="tabs-group__button">Recovered</label>
-            <label is="tab-button" class="tabs-group__button">Deaths</label>
+            <label is="tab-button" class="tabs-group__button" title="Cases" value="cases" selected="true"></label>
+            <label is="tab-button" class="tabs-group__button" title="Recovered" value="recovered"></label>
+            <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
@@ -35,9 +35,9 @@
         <section class="map-section">Map should be here</section>
         <section class="dashboard__section map-controls">
           <tabs-group class="tabs-group" name="tabs-group-2">
-            <label is="tab-button" class="tabs-group__button" selected="true">Cases</label>
-            <label is="tab-button" class="tabs-group__button">Recovered</label>
-            <label is="tab-button" class="tabs-group__button">Deaths</label>
+            <label is="tab-button" class="tabs-group__button" title="Cases" value="cases" selected="true"></label>
+            <label is="tab-button" class="tabs-group__button" title="Recovered" value="recovered"></label>
+            <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
@@ -72,8 +72,13 @@
         </section>
         <section class="dashboard__section">
           <div class="widget-container">
-            <app-chart class="chart">Chart will be here</app-chart>
+            <app-chart class="chart"></app-chart>
           </div>
+          <tabs-group class="tabs-group" name="tabs-group-3">
+            <label is="tab-button" class="tabs-group__button" title="Cases" value="cases" selected="true"></label>
+            <label is="tab-button" class="tabs-group__button" title="Recovered" value="recovered"></label>
+            <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
+          </tabs-group>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
             <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">

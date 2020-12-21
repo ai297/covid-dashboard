@@ -99,10 +99,7 @@
   justify-content: center;
 }
 
-.map-controls {
-  //bottom: $footer-height + $base-padding-size;
-  @include flex-center;
-}
+.map-controls { @include flex-center; }
 
 .last-update {
   overflow: hidden;
@@ -110,6 +107,14 @@
   span {
     color: $color-recovered;
     letter-spacing: 0.06em;
+  }
+}
+
+@media(min-width: 1600px) {
+  .map-controls {
+    flex-direction: row;
+    border-radius: 2rem;
+    & > * { margin: 0 1rem; }
   }
 }
 

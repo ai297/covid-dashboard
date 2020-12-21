@@ -1,5 +1,6 @@
 import './styles/style.scss';
 import App from './js/app';
+import AppWidget from './js/app-widget';
 import TabButton from './js/tab-button';
 import TabsGroup from './js/tabs-group';
 import SearchForm from './js/search-form';
@@ -9,6 +10,7 @@ import SwitchButton from './js/switch-button';
 import LastUpdate from './js/last-update-section';
 import AppChart from './js/app-chart';
 
+window.customElements.define('app-widget', AppWidget);
 window.customElements.define('search-form', SearchForm);
 window.customElements.define('countries-list', CountriesList, { extends: 'ul' });
 window.customElements.define('country-section', CountrySection, { extends: 'li' });

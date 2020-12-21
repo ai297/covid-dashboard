@@ -35,8 +35,49 @@
 
     &--grow { flex-grow: 1; }
 
+    &--maximized {
+      position: fixed;
+      top: 0;
+      left: $base-padding-size;
+      right: $base-padding-size;
+      bottom: $base-padding-size;
+      z-index: 10;
+
+      &::before {
+        content: '';
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        display: block;
+        background-color: $sections-background;
+      }
+    }
+
     p {
       text-align: center;
+    }
+
+    .maximize-button {
+      position: absolute;
+      bottom: $base-padding-size / 2;
+      right: $base-padding-size / 2;
+      width: 1.6rem;
+      height: 1.6rem;
+      padding: .25rem;
+      z-index: 3;
+      color: $dark-font-color;
+      overflow: hidden;
+      transition: all .3s;
+      cursor: pointer;
+
+      &:hover { color: $main-font-color; }
+
+      & > input { display: none; }
+      & > input:checked ~ .maximize-icon { display: none; }
+      & > input:not(:checked) ~ .minimize-icon { display: none; }
     }
   }
 }
@@ -112,9 +153,18 @@
 
 @media(min-width: 1600px) {
   .map-controls {
+    padding-right: 2rem;
     flex-direction: row;
     border-radius: 2rem;
     & > * { margin: 0 1rem; }
+
+    .maximize-button {
+      position: absolute;
+      margin: 0;
+      right: $base-padding-size;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
 

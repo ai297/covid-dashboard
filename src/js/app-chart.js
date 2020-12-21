@@ -32,7 +32,7 @@ class AppChart extends HTMLElement {
     });
 
     window.addEventListener(EVENTS.UI.tabChange, (event) => {
-      if (this.cumulativeData) this.displayValue = event.detail.selected;
+      if (this.cumulativeData) this.displayValue = event.detail.value;
       this.updateChart();
     });
     window.addEventListener(EVENTS.UI.switchChange, (event) => {

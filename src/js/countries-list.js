@@ -15,7 +15,7 @@ class CountriesList extends HTMLUListElement {
     });
 
     window.addEventListener(EVENTS.UI.tabChange, (event) => {
-      if (this.countrySections) this.updateValues(event.detail.selected);
+      if (this.countrySections) this.updateValues(event.detail.value);
     });
     window.addEventListener(EVENTS.UI.switchChange, (event) => {
       switch (event.detail.name) {

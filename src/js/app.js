@@ -1,6 +1,6 @@
 import DataService from './data-service';
 import EVENTS from './events';
-import MapCovid from './map-covid';
+
 
 class App {
   constructor() {

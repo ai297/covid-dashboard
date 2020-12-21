@@ -41,6 +41,7 @@ class CountriesList extends HTMLUListElement {
       if (countryName === this.selectedCountry) {
         event.stopPropagation();
         this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide.country));
+        this.selectedCountry = this.worldwide.country;
       } else this.selectCountry(countryName);
     });
   }

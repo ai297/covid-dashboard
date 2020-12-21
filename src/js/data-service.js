@@ -1,4 +1,4 @@
-import { mapSummaryData, mapDetailData /* filterSummaryData */ } from './data-mapping';
+import { mapSummaryData, mapDetailData, filterSummaryData } from './data-mapping';
 
 // const SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&sort=cases';
 // const WORLDWIDE_SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=false';
@@ -70,7 +70,7 @@ class DataService {
               if (!res.ok) rejectAll(this.summaryLoadCallbacks, Error(`Countries summary data loading error (${res.status})`));
               else {
                 res.json().then((summary) => {
-                  this.summary.push(...summary);
+                  this.summary.push(...filterSummaryData(summary).map(mapSummaryData));
                   resolveAll(this.summaryLoadCallbacks, [...this.summary]);
                 }).finally(() => {
                   this.summaryLoadCallbacks = [];

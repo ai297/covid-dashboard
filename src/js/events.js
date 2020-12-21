@@ -48,5 +48,15 @@ const EVENTS = {
       },
     });
   },
+
+  getTabChangeEvent(tabsGroupName, tabButtonSelected) {
+    return new CustomEvent(this.UI.tabChange, {
+      ...this.defaultSettings,
+      detail: {
+        name: tabsGroupName,
+        value: tabButtonSelected,
+      },
+    });
+  },
 };
 export default EVENTS;

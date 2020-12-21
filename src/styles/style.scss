@@ -104,6 +104,13 @@ img { line-height: 0; }
   display: block;
 }
 
+@media(min-width: 1600px) {
+  html { font-size: 18px; }
+}
+@media(max-width: 900px) {
+
+}
+
 @import './dashboard.scss';
 @import './search-form.scss';
 @import './countries-list.scss';

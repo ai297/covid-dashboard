@@ -2,6 +2,7 @@
 
 .dashboard {
   display: flex;
+  flex-direction: row;
 
   &__column {
     position: relative;
@@ -44,6 +45,7 @@
 
 .widget-container {
   position: relative;
+  min-height: 10rem;
   margin: $base-padding-size 0;
   padding: $base-padding-size / 2;
   border: $default-border;
@@ -108,5 +110,26 @@
   span {
     color: $color-recovered;
     letter-spacing: 0.06em;
+  }
+}
+
+@media(max-width: 900px) {
+  .dashboard {
+    flex-wrap: wrap;
+    &__column {
+      &--widget-column {
+        max-width: unset;
+        flex: 0 0 50%;
+        order: 1;
+      }
+      &--map-column {
+        flex: 0 0 100%;
+        order: 2;
+      }
+    }
+  }
+  .map-section {
+    position: relative;
+    min-height: 35rem;
   }
 }

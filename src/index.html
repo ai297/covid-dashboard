@@ -45,22 +45,9 @@
       </div>
       <div class="dashboard__column dashboard__column--widget-column">
         <app-widget class="dashboard__section" maximized-class="dashboard__section--maximized">
-          <h2 class="widget-title">Worldwide</h2>
+          <h2 is="country-title" class="widget-title">Worldwide</h2>
           <div class="widget-container">
-            <table class="widget-table">
-              <tr>
-                <td>Cases</td>
-                <td class="cases">71986171</td>
-              </tr>
-              <tr>
-                <td>Recovered</td>
-                <td class="recovered">47022409</td>
-              </tr>
-              <tr>
-                <td>Deaths</td>
-                <td class="deaths">1609413</td>
-              </tr>
-            </table>
+            <table is="app-table" class="widget-table"></table>
           </div>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>

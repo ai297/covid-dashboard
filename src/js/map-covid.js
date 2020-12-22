@@ -11,8 +11,7 @@ class MapCovid extends HTMLElement {
   connectedCallback() {
     this.append(this.mapContainer);
 
-    const mapBoxAPIKey =
-      'pk.eyJ1IjoibGlrdmlkYXMiLCJhIjoiY2tpdnAyODhtM2M2dTMycWpnMXFiYXZwaCJ9.fozESJf22S8KduoAexP0Eg';
+    const mapBoxAPIKey = 'pk.eyJ1IjoibGlrdmlkYXMiLCJhIjoiY2tpdnAyODhtM2M2dTMycWpnMXFiYXZwaCJ9.fozESJf22S8KduoAexP0Eg';
 
     mapboxgl.accessToken = mapBoxAPIKey;
     // eslint-disable-next-line no-unused-vars
@@ -49,13 +48,6 @@ class MapCovid extends HTMLElement {
       className: 'popup-cov',
     });
 
-    function pointOnCircle(latitude, longitude) {
-      return {
-        type: 'Point',
-        coordinates: [latitude, longitude],
-      };
-    }
-
     map.on('load', () => {
       map.addSource('countries', {
         type: 'geojson',
@@ -85,13 +77,13 @@ class MapCovid extends HTMLElement {
           if (hoveredStateId) {
             map.setFeatureState(
               { source: 'countries', id: hoveredStateId },
-              { hover: false }
+              { hover: false },
             );
           }
           hoveredStateId = e.features[0].id;
           map.setFeatureState(
             { source: 'countries', id: hoveredStateId },
-            { hover: true }
+            { hover: true },
           );
 
           popup
@@ -107,7 +99,7 @@ class MapCovid extends HTMLElement {
         if (hoveredStateId) {
           map.setFeatureState(
             { source: 'countries', id: hoveredStateId },
-            { hover: false }
+            { hover: false },
           );
         }
         hoveredStateId = null;
@@ -121,21 +113,6 @@ class MapCovid extends HTMLElement {
         paint: {
           'line-color': '#53B9EA',
           'line-width': 0.5,
-        },
-      });
-
-      map.addSource('point', {
-        type: 'geojson',
-        data: pointOnCircle(50, 20),
-      });
-
-      map.addLayer({
-        id: 'point',
-        source: 'point',
-        type: 'circle',
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#007cbf',
         },
       });
     });

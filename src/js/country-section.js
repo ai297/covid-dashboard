@@ -1,9 +1,10 @@
 import EVENTS from './events';
+import CountryFlag from './country-flag';
 
 class CountrySection extends HTMLLIElement {
   constructor() {
     super();
-    this.flagElement = document.createElement('img');
+    this.flagElement = new CountryFlag();
     this.flagElement.className = 'country-flag';
     this.countryNameElement = document.createElement('span');
     this.countryNameElement.className = 'country-name';
@@ -27,20 +28,13 @@ class CountrySection extends HTMLLIElement {
     this.valueElement.className = type;
   }
 
-  get flag() {
-    return this.flagElement.src;
-  }
-
-  set flag(val) {
-    this.flagElement.src = val;
-  }
-
   get country() {
     return this.countryNameElement.innerText;
   }
 
   set country(val) {
     this.countryNameElement.innerText = val;
+    this.flagElement.country = val;
   }
 
   get value() {

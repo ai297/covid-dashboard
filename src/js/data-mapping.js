@@ -8,8 +8,7 @@ export function mapSummaryData(data) {
     todayDeaths: data.todayDeaths,
     recovered: data.recovered,
     todayRecovered: data.todayRecovered,
-    info: data.countryInfo ? {
-      flag: data.countryInfo.flag,
+    coords: data.countryInfo ? {
       long: data.countryInfo.long,
       lat: data.countryInfo.lat,
     } : null,

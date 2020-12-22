@@ -23,7 +23,14 @@
       z-index: 1;
     }
 
-    & > .country-flag { margin: 0; }
+    & > .country-flag {
+      width: 2.2rem;
+      height: 1.6rem;
+      margin: 0;
+      display: inline-block;
+      vertical-align: bottom;
+      background-repeat: no-repeat;
+    }
 
     & > .country-name { flex: 1 1 auto; }
 

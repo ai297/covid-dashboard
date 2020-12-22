@@ -43,8 +43,7 @@ class DataService {
    *    todayRecovered: 20277,
    *    deaths: 46404,
    *    todayDeaths: 488,
-   *    info: {
-   *      flag: url,
+   *    coords: {
    *      long: 11,
    *      lat: 22,
    *    },

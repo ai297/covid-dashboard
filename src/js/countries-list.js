@@ -5,17 +5,13 @@ class CountriesList extends HTMLUListElement {
   constructor() {
     super();
     window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
-      const data = event.detail;
+      const data = [...event.detail];
       [this.worldwide] = data.splice(0, 1);
       this.showSummary(data);
     });
-    window.addEventListener(EVENTS.DATA.showSummarySelected, (event) => {
-      const countryName = event.detail.country;
-      this.selectCountry(countryName);
-    });
 
     window.addEventListener(EVENTS.UI.tabChange, (event) => {
-      if (this.countrySections) this.updateValues(event.detail.selected);
+      if (this.countrySections) this.updateValues(event.detail.value);
     });
     window.addEventListener(EVENTS.UI.switchChange, (event) => {
       switch (event.detail.name) {
@@ -32,7 +28,6 @@ class CountriesList extends HTMLUListElement {
       }
       this.updateValues(this.displayValue);
     });
-
     window.addEventListener(EVENTS.UI.searchInput, (event) => {
       if (!event.detail) this.append(...this.countrySections);
       else this.filter(event.detail.toLowerCase());
@@ -40,6 +35,14 @@ class CountriesList extends HTMLUListElement {
     window.addEventListener(EVENTS.UI.searchSelect, (event) => {
       if (!event.detail) this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide?.country));
       else this.children[0].select();
+    });
+    this.addEventListener(EVENTS.UI.selectCountry, (event) => {
+      const countryName = event.detail;
+      if (countryName === this.selectedCountry) {
+        event.stopPropagation();
+        this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide.country));
+        this.selectedCountry = this.worldwide.country;
+      } else this.selectCountry(countryName);
     });
   }
 
@@ -59,6 +62,7 @@ class CountriesList extends HTMLUListElement {
       country.index = index;
       this.countrySections.push(country);
     });
+    this.selectedCountry = this.worldwide.country;
     this.updateValues(this.displayValue);
   }
 
@@ -80,19 +84,19 @@ class CountriesList extends HTMLUListElement {
   }
 
   selectCountry(countryName) {
-    if (this.selectedCountry && this.selectedCountry === countryName && this.worldwide) {
-      this.selectedCountry = this.worldwide.country;
-      this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide.country));
-      return;
-    }
     this.append(...this.countrySections);
     this.countrySections.map((cs) => cs.classList.remove('countries-list__item--selected'));
     const countrySection = this.countrySections.find((cs) => cs.country === countryName);
     if (!countrySection) return;
+
     countrySection.classList.add('countries-list__item--selected');
-    const rectList = this.getBoundingClientRect();
+    const rectContainer = this.parentElement.getBoundingClientRect();
     const rectCountry = countrySection.getBoundingClientRect();
-    this.parentElement.scrollTop = rectCountry.top - rectList.top;
+    // console.log(rectContainer, rectCountry, this.parentElement.scrollTop);
+    if (rectCountry.top < rectContainer.top
+      || rectCountry.top > rectContainer.top + rectContainer.height) {
+      this.parentElement.scrollTop = rectCountry.top - rectContainer.top;
+    }
     this.selectedCountry = countryName;
   }
 
@@ -102,7 +106,6 @@ class CountriesList extends HTMLUListElement {
       return countrySection.country.toLowerCase().startsWith(value);
     }
     this.append(...this.countrySections.filter(countryNameFilter));
-    if (this.children.length === 1) this.children[0].select();
   }
 
   sort() {

@@ -13,7 +13,7 @@ export function mapSummaryData(data) {
       long: data.countryInfo.long,
       lat: data.countryInfo.lat,
     } : null,
-    updated: new Date(data.updated),
+    updated: data.updated,
   };
 }
 
@@ -35,4 +35,32 @@ export function mapDetailData(data) {
     });
   });
   return result;
+}
+
+export function getDailyData(data) {
+  const output = [];
+  let sum = {};
+  data.forEach((num, index) => {
+    if (index === 0) {
+      output[index] = num;
+      sum = {
+        cases: num.cases,
+        recovered: num.recovered,
+        deaths: num.deaths,
+      };
+    } else {
+      output[index] = {
+        date: num.date,
+        cases: num.cases - sum.cases,
+        recovered: num.recovered - sum.recovered,
+        deaths: num.deaths - sum.deaths,
+      };
+      sum = {
+        cases: num.cases,
+        recovered: num.recovered,
+        deaths: num.deaths,
+      };
+    }
+  });
+  return output;
 }

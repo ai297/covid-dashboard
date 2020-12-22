@@ -48,6 +48,7 @@ class DataService {
    *      long: 11,
    *      lat: 22,
    *    },
+   *    updated: Date
    *  }
    * ]
    */
@@ -71,7 +72,7 @@ class DataService {
               else {
                 res.json().then((summary) => {
                   this.summary.push(...filterSummaryData(summary).map(mapSummaryData));
-                  resolveAll(this.summaryLoadCallbacks, this.summary);
+                  resolveAll(this.summaryLoadCallbacks, [...this.summary]);
                 }).finally(() => {
                   this.summaryLoadCallbacks = [];
                   this.summaryLoadStarted = false;
@@ -94,7 +95,7 @@ class DataService {
 
   getSummaryFor(countryName) {
     if (!this.summary) return {};
-    return this.summary.find(({ country }) => country === countryName) || {};
+    return { ...this.summary.find(({ country }) => country === countryName) } || {};
   }
 
   /**
@@ -139,7 +140,7 @@ class DataService {
             resolveAll(this.detailLoadCallbacks, {
               country: this.detailedCountry,
               population,
-              detail: this.detail,
+              detail: [...this.detail],
             });
           }).finally(() => {
             this.detailLoadCallbacks = [];

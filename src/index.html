@@ -10,7 +10,7 @@
     <main id="dashboard-app" class="dashboard">
       <div class="dashboard__column dashboard__column--widget-column">
         <section class="dashboard__section dashboard__header"><h1 class="widget-title">Covid-2019 dashboard</h1></section>
-        <section class="dashboard__section dashboard__section--grow">
+        <app-widget class="dashboard__section dashboard__section--grow" maximized-class="dashboard__section--maximized">
           <search-form class="search-form" placeholder="Select country"></search-form>
           <div class="widget-container widget-container--grow">
             <div class="widget-container__scroll custom-scrollbar">
@@ -18,35 +18,33 @@
             </div>
           </div>
           <tabs-group class="tabs-group" name="tabs-group-1">
-            <label is="tab-button" class="tabs-group__button" selected="true">Cases</label>
-            <label is="tab-button" class="tabs-group__button">Recovered</label>
-            <label is="tab-button" class="tabs-group__button">Deaths</label>
+            <label is="tab-button" class="tabs-group__button" title="Cases" value="cases" selected="true"></label>
+            <label is="tab-button" class="tabs-group__button" title="Recovered" value="recovered"></label>
+            <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
             <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients"></label>
           </toggle-group>
-        </section>
-        <section class="dashboard__section last-update">
-          <p>Last update: 14.12.2020 12:00</p>
-        </section>
+        </app-widget>
+        <last-update-section class="dashboard__section last-update"></last-update-section>
       </div>
-      <div class="dashboard__column dashboard__column--map-column">
+      <div class="dashboard__column dashboard__column--map-column" id="map-column">
         <map-cov class="map-section"></map-cov>
-        <section class="dashboard__section map-controls">
+        <app-widget class="dashboard__section map-controls" maximized-class="dashboard__section--maximized" for="#map-column">
           <tabs-group class="tabs-group" name="tabs-group-2">
-            <label is="tab-button" class="tabs-group__button" selected="true">Cases</label>
-            <label is="tab-button" class="tabs-group__button">Recovered</label>
-            <label is="tab-button" class="tabs-group__button">Deaths</label>
+            <label is="tab-button" class="tabs-group__button" title="Cases" value="cases" selected="true"></label>
+            <label is="tab-button" class="tabs-group__button" title="Recovered" value="recovered"></label>
+            <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
             <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients"></label>
           </toggle-group>
-        </section>
+      </app-widget>
       </div>
       <div class="dashboard__column dashboard__column--widget-column">
-        <section class="dashboard__section">
+        <app-widget class="dashboard__section" maximized-class="dashboard__section--maximized">
           <h2 class="widget-title">Worldwide</h2>
           <div class="widget-container">
             <table class="widget-table">
@@ -69,17 +67,22 @@
             <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
             </label>
           </toggle-group>
-        </section>
-        <section class="dashboard__section">
+        </app-widget>
+        <app-widget class="dashboard__section" maximized-class="dashboard__section--maximized">
           <div class="widget-container">
-            <app-chart class="chart">Chart will be here</app-chart>
+            <app-chart class="chart"></app-chart>
           </div>
+          <tabs-group class="tabs-group" name="tabs-group-3">
+            <label is="tab-button" class="tabs-group__button" title="Cases" value="cases" selected="true"></label>
+            <label is="tab-button" class="tabs-group__button" title="Recovered" value="recovered"></label>
+            <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
+          </tabs-group>
           <toggle-group class="toggle-group">
             <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
             <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
             </label>
           </toggle-group>
-        </section>
+        </app-widget>
       </div>
     </main>
     <footer>

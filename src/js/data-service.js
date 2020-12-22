@@ -48,6 +48,7 @@ class DataService {
    *      long: 11,
    *      lat: 22,
    *    },
+   *    updated: Date
    *  }
    * ]
    */

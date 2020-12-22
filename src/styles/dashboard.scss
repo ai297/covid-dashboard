@@ -101,3 +101,12 @@
   //bottom: $footer-height + $base-padding-size;
   @include flex-center;
 }
+
+.last-update {
+  overflow: hidden;
+  white-space: nowrap;
+  span {
+    color: $color-recovered;
+    letter-spacing: 0.06em;
+  }
+}

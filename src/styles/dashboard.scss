@@ -2,6 +2,7 @@
 
 .dashboard {
   display: flex;
+  flex-direction: row;
 
   &__column {
     position: relative;
@@ -44,6 +45,7 @@
 
 .widget-container {
   position: relative;
+  min-height: 8rem;
   margin: $base-padding-size 0;
   padding: $base-padding-size / 2;
   border: $default-border;
@@ -97,10 +99,7 @@
   justify-content: center;
 }
 
-.map-controls {
-  //bottom: $footer-height + $base-padding-size;
-  @include flex-center;
-}
+.map-controls { @include flex-center; }
 
 .last-update {
   overflow: hidden;
@@ -108,5 +107,34 @@
   span {
     color: $color-recovered;
     letter-spacing: 0.06em;
+  }
+}
+
+@media(min-width: 1600px) {
+  .map-controls {
+    flex-direction: row;
+    border-radius: 2rem;
+    & > * { margin: 0 1rem; }
+  }
+}
+
+@media(max-width: 900px) {
+  .dashboard {
+    flex-wrap: wrap;
+    &__column {
+      &--widget-column {
+        max-width: unset;
+        flex: 0 0 50%;
+        order: 1;
+      }
+      &--map-column {
+        flex: 0 0 100%;
+        order: 2;
+      }
+    }
+  }
+  .map-section {
+    position: relative;
+    min-height: 35rem;
   }
 }

@@ -4,12 +4,12 @@
   cursor: pointer;
 }
 
-.toggle-period__label {
+.toggle__label {
   margin-left: 40px;
   transition: all ease 0.3s;
 }
 
-.toggle-period__label::before {
+.toggle__label::before {
   content: "";
   position: absolute;
   top: 0;
@@ -22,7 +22,7 @@
   transition: all ease 0.3s;
 }
 
-.toggle-period__label::after {
+.toggle__label::after {
   content: "";
   position: absolute;
   top: 0;
@@ -35,15 +35,15 @@
   transition: all ease 0.3s;
 }
 
-.toggle-period__checkbox {
+.toggle__checkbox {
   display: none;
 }
 
-.toggle-period__checkbox:checked + .toggle-period__label::after {
+.toggle__checkbox:checked + .toggle__label::after {
   background-color: #000000;
   transform: translate(0, -55%);
 }
 
-.toggle-period__checkbox:checked + .toggle-period__label::before {
+.toggle__checkbox:checked + .toggle__label::before {
   background-color: #767a83;
 }

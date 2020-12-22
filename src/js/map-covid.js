@@ -24,6 +24,30 @@ class MapCovid extends HTMLElement {
     });
 
     let hoveredStateId = null;
+    const markerHeight = 50;
+    const markerRadius = 10;
+    const linearOffset = 25;
+    const popupOffsets = {
+      top: [0, 0],
+      'top-left': [0, 0],
+      'top-right': [0, 0],
+      bottom: [0, -markerHeight],
+      'bottom-left': [
+        linearOffset,
+        (markerHeight - markerRadius + linearOffset) * -1,
+      ],
+      'bottom-right': [
+        -linearOffset,
+        (markerHeight - markerRadius + linearOffset) * -1,
+      ],
+      left: [markerRadius, (markerHeight - markerRadius) * -1],
+      right: [-markerRadius, (markerHeight - markerRadius) * -1],
+    };
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+      offset: popupOffsets,
+      className: 'popup-cov',
+    });
 
     function pointOnCircle(latitude, longitude) {
       return {
@@ -69,10 +93,17 @@ class MapCovid extends HTMLElement {
             { source: 'countries', id: hoveredStateId },
             { hover: true }
           );
+
+          popup
+            .setLngLat(e.lngLat)
+            .setHTML(`<div>${e.features[0].properties.name}</div>`)
+            .setMaxWidth('300px')
+            .addTo(map);
         }
       });
 
       map.on('mouseleave', 'country-fills', () => {
+        popup.remove();
         if (hoveredStateId) {
           map.setFeatureState(
             { source: 'countries', id: hoveredStateId },

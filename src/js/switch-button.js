@@ -12,18 +12,12 @@ class SwitchButton extends HTMLLabelElement {
     this.checkbox.addEventListener('change', (e) => {
       e.stopPropagation();
       if (!this.notDispatchEvent) {
-        this.dispatchEvent(
-          EVENTS.getSwitchChangeEvent(
-            this.getAttribute('name'),
-            this.checkbox.checked
-          )
-        );
+        this.dispatchEvent(EVENTS.getSwitchChangeEvent(this.getAttribute('name'), this.checkbox.checked));
       }
       this.notDispatchEvent = false;
     });
     window.addEventListener(EVENTS.UI.switchChange, (event) => {
-      if (event.detail.name === this.getAttribute('name'))
-        this.handlerChange(event.detail.value);
+      if (event.detail.name === this.getAttribute('name')) this.handlerChange(event.detail.value);
     });
   }
 

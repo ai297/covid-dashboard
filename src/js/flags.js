@@ -20,6 +20,6 @@ export default {
     'Slovenia', 'Slovakia', 'Sierra Leone', 'San Marino', 'Senegal', 'Somalia', 'Suriname', 'South Sudan', 'Sao Tome and Principe', 'El Salvador', 'Sint Maarten',
     'Syrian Arab Republic', 'Swaziland', 'Turks and Caicos Islands', 'Chad', 'Togo', 'Thailand', 'Tajikistan', 'Timor-Leste', 'Tunisia', 'Turkey', 'Trinidad and Tobago',
     'Taiwan', 'Tanzania', 'Ukraine', 'Uganda', 'USA', 'Uruguay', 'Uzbekistan', 'Holy See (Vatican City State)', 'Saint Vincent and the Grenadines', 'Venezuela', 'British Virgin Islands',
-    'Vietnam', 'Vanuatu', 'Wallis and Futuna', 'Samoa', 'Yemen', 'Mayotte', 'South Africa', 'Zambia', 'Zimbabwe',
+    'Vietnam', 'Vanuatu', 'Wallis and Futuna', 'Samoa', 'Yemen', 'Mayotte', 'South Africa', 'Zambia', 'Zimbabwe', 'Worldwide',
   ],
 };

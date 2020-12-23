@@ -1,121 +1,81 @@
-import mapboxgl from 'mapbox-gl';
+import EVENTS from './events';
+import createMap from './createMap';
 
 class MapCovid extends HTMLElement {
   constructor() {
     super();
 
     this.mapContainer = document.createElement('div');
-    this.mapContainer.setAttribute('id', 'map');
+    this.append(this.mapContainer);
+    this.map = createMap(this.mapContainer, this.createPopUpHTML, this.selectCountry);
+
+    window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
+      this.data = event.detail;
+    });
+    window.addEventListener(EVENTS.DATA.showSummarySelected, (event) => {
+      const { coords } = event.detail;
+      if (coords) this.flyTo(coords.long, coords.lat);
+    });
+
+    window.addEventListener(EVENTS.UI.tabChange, (event) => {
+      this.updateValues(event.detail.value);
+    });
+    window.addEventListener(EVENTS.UI.switchChange, (event) => {
+      switch (event.detail.name) {
+      case 'period':
+        this.isShowAllTime = !event.detail.value;
+        break;
+      case 'amount-pacients':
+        this.isShowAbsolute = !event.detail.value;
+        break;
+      default:
+        this.isShowAllTime = true;
+        this.isShowAbsolute = true;
+        break;
+      }
+      this.updateValues(this.displayValue);
+    });
   }
 
-  connectedCallback() {
-    this.append(this.mapContainer);
+  displayValue = 'cases';
 
-    const mapBoxAPIKey = 'pk.eyJ1IjoibGlrdmlkYXMiLCJhIjoiY2tpdnAyODhtM2M2dTMycWpnMXFiYXZwaCJ9.fozESJf22S8KduoAexP0Eg';
+  isShowAbsolute = true;
 
-    mapboxgl.accessToken = mapBoxAPIKey;
-    // eslint-disable-next-line no-unused-vars
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v10',
-      center: [20, 40],
-      zoom: 1,
-    });
+  isShowAllTime = true;
 
-    let hoveredStateId = null;
-    const markerHeight = 50;
-    const markerRadius = 10;
-    const linearOffset = 25;
-    const popupOffsets = {
-      top: [0, 0],
-      'top-left': [0, 0],
-      'top-right': [0, 0],
-      bottom: [0, -markerHeight],
-      'bottom-left': [
-        linearOffset,
-        (markerHeight - markerRadius + linearOffset) * -1,
-      ],
-      'bottom-right': [
-        -linearOffset,
-        (markerHeight - markerRadius + linearOffset) * -1,
-      ],
-      left: [markerRadius, (markerHeight - markerRadius) * -1],
-      right: [-markerRadius, (markerHeight - markerRadius) * -1],
-    };
-    const popup = new mapboxgl.Popup({
-      closeButton: false,
-      offset: popupOffsets,
-      className: 'popup-cov',
-    });
+  updateValues(value) {
+    this.displayValue = value;
+  }
 
-    map.on('load', () => {
-      map.addSource('countries', {
-        type: 'geojson',
-        data:
-          'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson',
-        generateId: true,
-      });
+  getValueFor(countryInfo) {
+    const todayField = `today${this.displayValue[0].toUpperCase()}${this.displayValue.slice(1)}`;
+    let value = this.isShowAllTime ? countryInfo[this.displayValue]
+      : countryInfo[todayField];
+    value = this.isShowAbsolute ? value : (100000 * (value / countryInfo.population));
+    return +value.toFixed(2);
+  }
 
-      map.addLayer({
-        id: 'country-fills',
-        type: 'fill',
-        source: 'countries',
-        layout: {},
-        paint: {
-          'fill-color': '#50E3C2',
-          'fill-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.5,
-            0,
-          ],
-        },
-      });
+  createPopUpHTML = (isoCode) => {
+    const countryInfo = this.data?.find((c) => c.iso === isoCode);
+    if (countryInfo) {
+      return `
+        <div class="map-popup__country-name">${countryInfo.country}</div>
+        <div class="map-popup__value">
+          <span>${this.displayValue}:</span>
+          <span class="${this.displayValue}">${this.getValueFor(countryInfo)}</span>
+        </div>
+      `;
+    }
+    return 'No data';
+  }
 
-      map.on('mousemove', 'country-fills', (e) => {
-        if (e.features.length > 0) {
-          if (hoveredStateId) {
-            map.setFeatureState(
-              { source: 'countries', id: hoveredStateId },
-              { hover: false },
-            );
-          }
-          hoveredStateId = e.features[0].id;
-          map.setFeatureState(
-            { source: 'countries', id: hoveredStateId },
-            { hover: true },
-          );
+  selectCountry = (isoCode) => {
+    const countryInfo = this.data?.find((c) => c.iso === isoCode);
+    if (countryInfo) this.dispatchEvent(EVENTS.getSelectCountryEvent(countryInfo.country));
+  };
 
-          popup
-            .setLngLat(e.lngLat)
-            .setHTML(`<div>${e.features[0].properties.name}</div>`)
-            .setMaxWidth('300px')
-            .addTo(map);
-        }
-      });
-
-      map.on('mouseleave', 'country-fills', () => {
-        popup.remove();
-        if (hoveredStateId) {
-          map.setFeatureState(
-            { source: 'countries', id: hoveredStateId },
-            { hover: false },
-          );
-        }
-        hoveredStateId = null;
-      });
-
-      map.addLayer({
-        id: 'country-borders',
-        type: 'line',
-        source: 'countries',
-        layout: {},
-        paint: {
-          'line-color': '#53B9EA',
-          'line-width': 0.5,
-        },
-      });
-    });
+  flyTo(long, lat) {
+    this.map.flyTo({ center: [long, lat], zoom: 4 });
   }
 }
 

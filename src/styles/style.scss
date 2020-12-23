@@ -57,11 +57,6 @@ a:hover, a:focus {
 
 img { line-height: 0; }
 
-#map {
-  width: 100%;
-  height: 100%;
-}
-
 .custom-scrollbar {
   &::-webkit-scrollbar { width: .5rem; }
   &::-webkit-scrollbar-track { background-color: transparent; }
@@ -79,7 +74,7 @@ img { line-height: 0; }
     min-width: 10%;
     text-align: center;
     svg {
-      height: 2.5rem;
+      height: 2rem;
     }
   }
 }
@@ -142,3 +137,5 @@ img { line-height: 0; }
 @import './tabs-group.scss';
 @import './mapbox-gl.scss';
 @import './switch-button.scss';
+@import './map-custom-styles.scss';
+@import '../keyboard/keyboard.scss';

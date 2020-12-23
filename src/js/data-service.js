@@ -36,6 +36,7 @@ class DataService {
    * data = [
    *  {
    *    country: 'Russia',
+   *    iso: 'RUS' - 3 chars country code
    *    population: 146748590,
    *    cases: 2629699,
    *    todayCases: 28080,

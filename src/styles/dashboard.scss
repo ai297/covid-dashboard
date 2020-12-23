@@ -88,6 +88,7 @@
 }
 
 .widget-title { text-align: center; }
+.widget-title > span { margin: 0 .25em; }
 
 .widget-container {
   position: relative;
@@ -141,12 +142,6 @@
   right: 0;
   flex: 1 1 auto;
   width: 100%;
-
-  // временно
-  background-color: darkslateblue;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .map-controls { 
@@ -160,6 +155,8 @@
     margin: 0;
   }
 }
+
+.dashboard__column--map-column.dashboard__section--maximized { padding-bottom: 1em; }
 
 .last-update {
   overflow: hidden;

@@ -30,7 +30,7 @@ class CountriesList extends HTMLUListElement {
     });
     window.addEventListener(EVENTS.UI.searchInput, (event) => {
       if (!event.detail) this.append(...this.countrySections);
-      else this.filter(event.detail.toLowerCase());
+      else this.filter(event.detail.trim().toLowerCase());
     });
     window.addEventListener(EVENTS.UI.searchSelect, (event) => {
       if (!event.detail) this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide?.country));
@@ -43,6 +43,9 @@ class CountriesList extends HTMLUListElement {
         this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide.country));
         this.selectedCountry = this.worldwide.country;
       } else this.selectCountry(countryName);
+    });
+    window.addEventListener(EVENTS.UI.selectCountry, (event) => {
+      this.selectCountry(event.detail);
     });
   }
 

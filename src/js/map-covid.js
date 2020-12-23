@@ -1,5 +1,11 @@
 import EVENTS from './events';
-import createMap from './createMap';
+import MapAdapter from './map-adapter';
+
+const MARKER_COLORS = {
+  cases: '#53B9EA',
+  recovered: '#50E3C2',
+  deaths: '#E3507A',
+};
 
 class MapCovid extends HTMLElement {
   constructor() {
@@ -7,14 +13,16 @@ class MapCovid extends HTMLElement {
 
     this.mapContainer = document.createElement('div');
     this.append(this.mapContainer);
-    this.map = createMap(this.mapContainer, this.createPopUpHTML, this.selectCountry);
+    this.map = new MapAdapter(this.mapContainer);
 
     window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
       this.data = event.detail;
+      this.map.fillLayer(this.createPopUpHTML, this.selectCountry);
+      this.map.updateMarkers(MARKER_COLORS[this.displayValue], this.data, this.getValueFor);
     });
     window.addEventListener(EVENTS.DATA.showSummarySelected, (event) => {
       const { coords } = event.detail;
-      if (coords) this.flyTo(coords.long, coords.lat);
+      if (coords) this.map.flyTo(coords.long, coords.lat);
     });
 
     window.addEventListener(EVENTS.UI.tabChange, (event) => {
@@ -45,9 +53,10 @@ class MapCovid extends HTMLElement {
 
   updateValues(value) {
     this.displayValue = value;
+    this.map.updateMarkers(MARKER_COLORS[this.displayValue], this.data, this.getValueFor);
   }
 
-  getValueFor(countryInfo) {
+  getValueFor = (countryInfo) => {
     const todayField = `today${this.displayValue[0].toUpperCase()}${this.displayValue.slice(1)}`;
     let value = this.isShowAllTime ? countryInfo[this.displayValue]
       : countryInfo[todayField];
@@ -55,7 +64,7 @@ class MapCovid extends HTMLElement {
     return +value.toFixed(2);
   }
 
-  createPopUpHTML = (isoCode) => {
+  createPopUpHTML = (isoCode, name) => {
     const countryInfo = this.data?.find((c) => c.iso === isoCode);
     if (countryInfo) {
       return `
@@ -66,17 +75,13 @@ class MapCovid extends HTMLElement {
         </div>
       `;
     }
-    return 'No data';
+    return name;
   }
 
   selectCountry = (isoCode) => {
     const countryInfo = this.data?.find((c) => c.iso === isoCode);
     if (countryInfo) this.dispatchEvent(EVENTS.getSelectCountryEvent(countryInfo.country));
   };
-
-  flyTo(long, lat) {
-    this.map.flyTo({ center: [long, lat], zoom: 4 });
-  }
 }
 
 export default MapCovid;

@@ -30,7 +30,7 @@ class CountriesList extends HTMLUListElement {
     });
     window.addEventListener(EVENTS.UI.searchInput, (event) => {
       if (!event.detail) this.append(...this.countrySections);
-      else this.filter(event.detail.toLowerCase());
+      else this.filter(event.detail.trim().toLowerCase());
     });
     window.addEventListener(EVENTS.UI.searchSelect, (event) => {
       if (!event.detail) this.dispatchEvent(EVENTS.getSelectCountryEvent(this.worldwide?.country));

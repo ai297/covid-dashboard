@@ -167,18 +167,8 @@
 
 @media(min-width: 1600px) {
   .map-controls {
-    padding-right: 2rem;
+    padding-top: 1rem;
     flex-direction: row;
-    border-radius: 2rem;
-    & > * { margin: 0 1rem; }
-
-    .maximize-button {
-      position: absolute;
-      margin: 0;
-      right: $base-padding-size;
-      top: 50%;
-      transform: translateY(-50%);
-    }
   }
 }
 

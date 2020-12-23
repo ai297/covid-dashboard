@@ -23,8 +23,8 @@
             <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
-            <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
-            <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients"></label>
+            <label class="toggle toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
+            <label class="toggle toggle-amount-pacients" is="switch-btn" value-checked="Per 100K" value-unchecked="Total" name="amount-pacients"></label>
           </toggle-group>
         </app-widget>
         <last-update-section class="dashboard__section last-update"></last-update-section>
@@ -38,25 +38,25 @@
             <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
-            <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
-            <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients"></label>
+            <label class="toggle toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
+            <label class="toggle toggle-amount-pacients" is="switch-btn" value-checked="Per 100K" value-unchecked="Total" name="amount-pacients"></label>
           </toggle-group>
       </app-widget>
       </div>
       <div class="dashboard__column dashboard__column--widget-column">
         <app-widget class="dashboard__section" maximized-class="dashboard__section--maximized">
           <h2 is="country-title" class="widget-title">Worldwide</h2>
-          <div class="widget-container">
+          <div class="widget-container widget-container--table">
             <table is="app-table" class="widget-table"></table>
           </div>
           <toggle-group class="toggle-group">
-            <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
-            <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
+            <label class="toggle toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
+            <label class="toggle toggle-amount-pacients" is="switch-btn" value-checked="Per 100K" value-unchecked="Total" name="amount-pacients">
             </label>
           </toggle-group>
         </app-widget>
         <app-widget class="dashboard__section" maximized-class="dashboard__section--maximized">
-          <div class="widget-container">
+          <div class="widget-container widget-container--chart">
             <app-chart class="chart"></app-chart>
           </div>
           <tabs-group class="tabs-group" name="tabs-group-3">
@@ -65,8 +65,8 @@
             <label is="tab-button" class="tabs-group__button" title="Deaths" value="deaths"></label>
           </tabs-group>
           <toggle-group class="toggle-group">
-            <label class="toggle-period" is="switch-btn" value-checked="Today" value-unchecked="All time" name="period"></label>
-            <label class="toggle-amount-pacients" is="switch-btn" value-checked="p 100k" value-unchecked="Total" name="amount-pacients">
+            <label class="toggle toggle-period" is="switch-btn" value-checked="Daily" value-unchecked="All time" name="period"></label>
+            <label class="toggle toggle-amount-pacients" is="switch-btn" value-checked="Per 100K" value-unchecked="Total" name="amount-pacients">
             </label>
           </toggle-group>
         </app-widget>

@@ -2,11 +2,11 @@ import Chart from 'chart.js';
 import { getDailyData } from './data-mapping';
 import EVENTS from './events';
 
-const BACKGROUND_COLORS = {
-  cases: 'rgba(54, 162, 235, 0.2)',
-  recovered: 'rgba(75, 192, 192, 0.2)',
-  deaths: 'rgba(255, 99, 132, 0.2)',
-};
+// const BACKGROUND_COLORS = {
+//   cases: 'rgba(54, 162, 235, 0.2)',
+//   recovered: 'rgba(75, 192, 192, 0.2)',
+//   deaths: 'rgba(255, 99, 132, 0.2)',
+// };
 
 const BORDER_COLORS = {
   cases: 'rgba(54, 162, 235, 1)',
@@ -18,8 +18,6 @@ class AppChart extends HTMLElement {
   constructor() {
     super();
     const canvas = document.createElement('canvas');
-    canvas.width = 200;
-    canvas.height = 200;
     this.context = canvas.getContext('2d');
     this.append(canvas);
     this.createChart();
@@ -64,6 +62,15 @@ class AppChart extends HTMLElement {
         datasets: [],
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        gridLines: {
+          display: true,
+          color: '#fff',
+        },
+        legend: {
+          display: false,
+        },
         scales: {
           xAxes: [{
             type: 'time',
@@ -87,9 +94,9 @@ class AppChart extends HTMLElement {
     this.cfg.data.datasets.push({
       label: `${this.countryName}, ${this.displayValue}`,
       data: this.getDataForChart(),
-      backgroundColor: BACKGROUND_COLORS[this.displayValue],
+      backgroundColor: BORDER_COLORS[this.displayValue],
       borderColor: BORDER_COLORS[this.displayValue],
-      borderWidth: 1,
+      borderWidth: 0,
     });
     this.chart.update();
   }
@@ -101,7 +108,7 @@ class AppChart extends HTMLElement {
     chartData = chartData.map((el) => ({ x: Date.parse(el.date), y: el[this.displayValue] }));
     chartData = this.isShowAbsolute
       ? chartData
-      : chartData.map((el) => ({ x: el.x, y: Math.round(100000 * (el.y / this.population)) }));
+      : chartData.map((el) => ({ x: el.x, y: (100000 * (el.y / this.population)).toFixed(2) }));
     return chartData;
   }
 }

@@ -2,6 +2,7 @@
 
 .search-form {
   position: relative;
+  width: calc(100% - 2.5rem);
   border-radius: $default-border-radius;
   overflow: hidden;
 

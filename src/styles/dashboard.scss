@@ -6,6 +6,7 @@
 
   &__column {
     position: relative;
+    margin: 0 auto;
     padding: $base-padding-size;
     padding-bottom: $footer-height + $base-padding-size;
     @include flex-column;
@@ -52,7 +53,11 @@
         bottom: 0;
         z-index: -1;
         display: block;
-        background-color: $sections-background;
+        background-color: $color-primary-dark;
+      }
+
+      .chart {
+        min-height: 65vh;
       }
     }
 
@@ -62,7 +67,7 @@
 
     .maximize-button {
       position: absolute;
-      bottom: $base-padding-size / 2;
+      top: $base-padding-size / 2;
       right: $base-padding-size / 2;
       width: 1.6rem;
       height: 1.6rem;
@@ -104,6 +109,10 @@
     overflow: hidden;
     overflow-y: scroll;
   }
+
+  &--chart {
+    margin-top: 1.5rem;
+  }
 }
 
 .widget-table {
@@ -140,7 +149,17 @@
   justify-content: center;
 }
 
-.map-controls { @include flex-center; }
+.map-controls { 
+  @include flex-center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: .6rem 1.9rem; 
+
+  .tabs-group,
+  .toggle-group {
+    margin: 0;
+  }
+}
 
 .last-update {
   overflow: hidden;
@@ -172,9 +191,11 @@
   .dashboard {
     flex-wrap: wrap;
     &__column {
+      padding-bottom: 0;
+      
       &--widget-column {
         max-width: unset;
-        flex: 0 0 50%;
+        flex: 1 0 50%;
         order: 1;
       }
       &--map-column {
@@ -182,9 +203,22 @@
         order: 2;
       }
     }
+    &__section--grow {
+      order: 2;
+    }
   }
+
+  .widget-container:not(.widget-container--table) {
+    min-height: 15rem;
+  }
+
   .map-section {
     position: relative;
     min-height: 35rem;
+  }
+
+  .map-controls {
+    width: 100%;
+    margin: 10px 0;
   }
 }

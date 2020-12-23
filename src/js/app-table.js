@@ -46,7 +46,7 @@ class AppTable extends HTMLTableElement {
   getTableDataFor(valueType) {
     const todayField = `today${valueType[0].toUpperCase()}${valueType.slice(1)}`;
     let value = this.isShowAllTime ? this.data[valueType] : this.data[todayField];
-    value = this.isShowAbsolute ? value : Math.round(100000 * (value / this.data.population));
+    value = this.isShowAbsolute ? value : (100000 * (value / this.data.population)).toFixed(2);
     return value;
   }
 }

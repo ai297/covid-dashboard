@@ -44,6 +44,9 @@ class CountriesList extends HTMLUListElement {
         this.selectedCountry = this.worldwide.country;
       } else this.selectCountry(countryName);
     });
+    window.addEventListener(EVENTS.UI.selectCountry, (event) => {
+      this.selectCountry(event.detail);
+    });
   }
 
   displayValue = 'cases';

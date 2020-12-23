@@ -133,15 +133,10 @@
   right: 0;
   flex: 1 1 auto;
   width: 100%;
-
-  // временно
-  background-color: darkslateblue;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .map-controls { @include flex-center; }
+.dashboard__column--map-column.dashboard__section--maximized { padding-bottom: 1em; }
 
 .last-update {
   overflow: hidden;

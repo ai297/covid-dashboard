@@ -1,6 +1,7 @@
 export function mapSummaryData(data) {
   return {
     country: data.country ? data.country : 'Worldwide',
+    iso: data.countryInfo?.iso3,
     population: data.population,
     cases: data.cases,
     todayCases: data.todayCases,

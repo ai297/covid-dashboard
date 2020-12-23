@@ -1,0 +1,13 @@
+@import './constants.scss';
+
+.map-popup {
+  font-family: $primary-font;
+  font-size: 1rem;
+
+  .mapboxgl-popup-content {
+    background-color: $content-background;
+  }
+  .mapboxgl-popup-tip {
+    border-top-color: $content-background;
+  }
+}

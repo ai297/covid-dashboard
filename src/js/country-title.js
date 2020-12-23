@@ -4,7 +4,7 @@ class CountryTitle extends HTMLHeadingElement {
   constructor() {
     super();
     window.addEventListener(EVENTS.DATA.showSummarySelected, (event) => {
-      this.innerText = event.detail.country;
+      this.innerHTML = `<country-flag class="country-flag" country="${event.detail.country}"></country-flag><span>${event.detail.country}</span>`;
     });
   }
 }

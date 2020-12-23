@@ -1,0 +1,156 @@
+// @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '../styles/constants.scss';
+
+.virtual-keyboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    box-sizing: border-box;
+    padding-top: 2em;
+    padding-bottom: 1em;
+    font-family: $primary-font;
+    font-size: 1.3rem;
+    pointer-events: all;
+    background-color: $sections-background;
+    z-index: 11;
+}
+.virtual-keyboard--hidden {
+    position: fixed;
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.virtual-keyboard .material-icons {
+    font-size: 1em;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.virtual-keyboard--en .virtual-keyboard__key:nth-child(n+59),
+.virtual-keyboard--ru .virtual-keyboard__key:nth-child(n+59) { display: none; }
+
+.virtual-keyboard__keys-container {
+    position: relative;
+    width: 98%;
+    height: auto;
+    min-width: 30em;
+    max-width: 45em;
+    margin: 0 auto;
+    display: flex;
+    padding: 4px;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    background-color: rgb(112, 128, 144);
+    background-image: linear-gradient(to top, rgba(0,0,0,.3), transparent);
+    border-radius: .5em 0 .5em .5em;
+    transition: all .3s;
+    box-shadow: 0 .25em .5em rgba(0, 0, 0, 0.3);
+}
+.virtual-keyboard--hidden > .virtual-keyboard__keys-container,
+.virtual-keyboard__keys-container--minimize {
+    height: 0;
+    padding: 0;
+}
+.virtual-keyboard__keys-container--minimize > .virtual-keyboard__key { display: none; }
+
+.virtual-keyboard__key {
+    /* margin: 1px; */
+    padding: 2px;
+    flex: 1 1 6.5%;
+    font: inherit;
+    line-height: 1.5em;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 4px;
+    cursor: pointer;
+    background-color:rgba(255, 225, 180, 0.3);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5), inset 0 0 .75em rgba(0, 0, 0, 0.15);
+    transition: all .25s;
+}
+.virtual-keyboard__key:hover { background-color: rgb(100, 255, 100); }
+.virtual-keyboard__key:active,
+.virtual-keyboard__key--active {
+    transform: scale(.94);
+    background-color: rgb(255, 206, 45);
+}
+
+.virtual-keyboard__key--big { flex: 0 1 8%; }
+.virtual-keyboard__key--double { flex: 0 2 11%; }
+.virtual-keyboard__key--tripple { flex: 0 3 14%; }
+.virtual-keyboard__key--space { flex: 0 1 50%; }
+
+.virtual-keyboard__key.virtual-keyboard__key--space:active,
+.virtual-keyboard__key--active.virtual-keyboard__key--space {
+    background-color: rgb(130, 240, 255);
+    transform: scale(.98,.94) translateY(1px);
+}
+.virtual-keyboard__key.virtual-keyboard__key--big:active,
+.virtual-keyboard__key--active.virtual-keyboard__key--big,
+.virtual-keyboard__key.virtual-keyboard__key--double:active,
+.virtual-keyboard__key--active.virtual-keyboard__key--double,
+.virtual-keyboard__key.virtual-keyboard__key--tripple:active,
+.virtual-keyboard__key--active.virtual-keyboard__key--tripple {
+    background-color: rgb(130, 240, 255);
+}
+
+.virtual-keyboard__settings {
+    position: absolute;
+    width: auto;
+    bottom: 100%;
+    padding: 2px;
+    padding-left: 1em;
+    right: 0;
+
+    border: none;
+    border-radius: 2em .9em 0 0;
+    background-color: rgb(112, 128, 144);
+    overflow: hidden;
+    transition: all .3s;
+}
+.virtual-keyboard__keys-container--minimize .virtual-keyboard__settings-button { margin: 0; }
+.virtual-keyboard__keys-container--minimize .virtual-keyboard__settings-button:not(:last-child) { display: none; }
+.virtual-keyboard__keys-container--minimize > .virtual-keyboard__settings {
+    padding: 4px;
+    border-radius: 50%;
+    animation-name: blinking;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.virtual-keyboard__settings-button {
+    width: 1.7em;
+    height: 1.7em;
+    margin: 0 2px;
+    border: none;
+    border-radius: 50%;
+    color: rgb(255, 225, 180);
+    font-size: .8em;
+    line-height: 1.6em;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .5s;
+}
+.virtual-keyboard__settings-button:hover {
+    color: rgb(130, 240, 255);
+    background-color: black;
+}
+.virtual-keyboard__settings-button:active { transform: scale(.9); }
+
+@keyframes blinking {
+    from { opacity: 1; }
+    to { opacity: .3; }
+}
+@media(min-width: 1600px) {
+  .virtual-keyboard { font-size: 1.5rem; }
+}
+@media(max-width: 650px) {
+  .virtual-keyboard { font-size: 1rem; }
+}

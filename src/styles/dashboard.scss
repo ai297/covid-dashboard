@@ -146,8 +146,6 @@
 
 .map-controls { 
   @include flex-center;
-  flex-wrap: wrap;
-  flex-direction: row;
   padding: .6rem 1.9rem; 
 
   .tabs-group,

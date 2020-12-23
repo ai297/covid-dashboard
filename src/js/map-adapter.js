@@ -123,7 +123,6 @@ export default class MapAdapter {
         'circle-radius': ['get', 'radius'],
       },
     });
-    // this.map.moveLayer(MAP_MARKERS_LAYER, MAP_COUNTRIES_LAYER);
   }
 
   flyTo(long, lat) {

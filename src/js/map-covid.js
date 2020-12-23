@@ -18,7 +18,7 @@ class MapCovid extends HTMLElement {
     window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
       this.data = event.detail;
       this.map.fillLayer(this.createPopUpHTML, this.selectCountry);
-      this.map.updateMarkers(MARKER_COLORS[this.displayValue], this.data, this.getValueFor);
+      this.updateValues(this.displayValue);
     });
     window.addEventListener(EVENTS.DATA.showSummarySelected, (event) => {
       const { coords } = event.detail;

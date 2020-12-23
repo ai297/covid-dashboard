@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 
-export default function createMap(container) {
+export default function createMap(container, getPopupHTMLCallback, onCLickCallback) {
   const mapBoxAPIKey = 'pk.eyJ1IjoibGlrdmlkYXMiLCJhIjoiY2tpdnAyODhtM2M2dTMycWpnMXFiYXZwaCJ9.fozESJf22S8KduoAexP0Eg';
   mapboxgl.accessToken = mapBoxAPIKey;
   const map = new mapboxgl.Map({
@@ -57,11 +57,9 @@ export default function createMap(container) {
           { source: 'countries', id: hoveredStateId },
           { hover: true },
         );
-
         popup
           .setLngLat(e.lngLat)
-          .setHTML(`<div>${e.features[0].properties.name}</div>`)
-          .setMaxWidth('300px')
+          .setHTML(getPopupHTMLCallback?.call(this, e.features[0].properties.iso_a3))
           .addTo(map);
       }
     });
@@ -77,15 +75,8 @@ export default function createMap(container) {
       hoveredStateId = null;
     });
 
-    map.addLayer({
-      id: 'country-borders',
-      type: 'line',
-      source: 'countries',
-      layout: {},
-      paint: {
-        'line-color': '#53B9EA',
-        'line-width': 0.5,
-      },
+    map.on('click', 'country-fills', (e) => {
+      onCLickCallback?.call(this, e.features[0].properties.iso_a3);
     });
   });
   return map;

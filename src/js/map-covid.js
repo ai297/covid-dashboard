@@ -6,82 +6,76 @@ class MapCovid extends HTMLElement {
     super();
 
     this.mapContainer = document.createElement('div');
-    this.mapContainer.setAttribute('id', 'map');
+    this.append(this.mapContainer);
+    this.map = createMap(this.mapContainer, this.createPopUpHTML, this.selectCountry);
 
     window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
       this.data = event.detail;
     });
+    window.addEventListener(EVENTS.DATA.showSummarySelected, (event) => {
+      const { coords } = event.detail;
+      if (coords) this.flyTo(coords.long, coords.lat);
+    });
 
-    // map.on('mousemove', 'country-fills', (e) => {
-    //   if (e.features.length > 0) {
-    //     if (hoveredStateId) {
-    //       map.setFeatureState(
-    //         { source: 'countries', id: hoveredStateId },
-    //         { hover: false },
-    //       );
-    //     }
-    //     hoveredStateId = e.features[0].id;
-    //     map.setFeatureState(
-    //       { source: 'countries', id: hoveredStateId },
-    //       { hover: true },
-    //     );
-
-    //     const currentCountry = e.features[0].properties;
-    //     let currentIndicator;
-    //     this.dataStorage.forEach((data) => {
-    //       if (data.country === currentCountry.name) {
-    //         currentIndicator = data[this.indicator];
-    //       }
-    //     });
-
-    //     popup
-    //       .setLngLat(e.lngLat)
-    //       .setHTML(`
-    //          <div>${currentCountry.name}</div>
-    //          <div>${this.indicator.toUpperCase()}: ${currentIndicator}</div>`)
-    //       .setMaxWidth('300px')
-    //       .addTo(map);
-    //   }
-    // });
-
-    // map.on('mouseleave', 'country-fills', () => {
-    //   popup.remove();
-    //   if (hoveredStateId) {
-    //     map.setFeatureState(
-    //       { source: 'countries', id: hoveredStateId },
-    //       { hover: false },
-    //     );
-    //   }
-    //   hoveredStateId = null;
-    // });
-
-    // map.addLayer({
-    //   id: 'country-borders',
-    //   type: 'line',
-    //   source: 'countries',
-    //   layout: {},
-    //   paint: {
-    //     'line-color': '#53B9EA',
-    //     'line-width': 0.5,
-    //   },
-    // });
-    // });
-
-    // window.addEventListener(EVENTS.UI.tabChange, (event) => {
-    //   this.indicator = event.detail.value;
-    // });
-    // window.addEventListener(EVENTS.UI.selectCountry, (event) => {
-    //   this.selectCountry = event.detail;
-    //   flyToCountry(this.selectCountry);
-    // });
-    this.append(this.mapContainer);
-    this.map = createMap('map');
+    window.addEventListener(EVENTS.UI.tabChange, (event) => {
+      this.updateValues(event.detail.value);
+    });
+    window.addEventListener(EVENTS.UI.switchChange, (event) => {
+      switch (event.detail.name) {
+      case 'period':
+        this.isShowAllTime = !event.detail.value;
+        break;
+      case 'amount-pacients':
+        this.isShowAbsolute = !event.detail.value;
+        break;
+      default:
+        this.isShowAllTime = true;
+        this.isShowAbsolute = true;
+        break;
+      }
+      this.updateValues(this.displayValue);
+    });
   }
 
-  indicator = 'cases'
+  displayValue = 'cases';
 
-  flyToCountry(long, lat) {
-    this.map.flyTo({ center: [long, lat], zoom: 5 });
+  isShowAbsolute = true;
+
+  isShowAllTime = true;
+
+  updateValues(value) {
+    this.displayValue = value;
+  }
+
+  getValueFor(countryInfo) {
+    const todayField = `today${this.displayValue[0].toUpperCase()}${this.displayValue.slice(1)}`;
+    let value = this.isShowAllTime ? countryInfo[this.displayValue]
+      : countryInfo[todayField];
+    value = this.isShowAbsolute ? value : (100000 * (value / countryInfo.population));
+    return +value.toFixed(2);
+  }
+
+  createPopUpHTML = (isoCode) => {
+    const countryInfo = this.data?.find((c) => c.iso === isoCode);
+    if (countryInfo) {
+      return `
+        <div class="map-popup__country-name">${countryInfo.country}</div>
+        <div class="map-popup__value">
+          <span>${this.displayValue}:</span>
+          <span class="${this.displayValue}">${this.getValueFor(countryInfo)}</span>
+        </div>
+      `;
+    }
+    return 'No data';
+  }
+
+  selectCountry = (isoCode) => {
+    const countryInfo = this.data?.find((c) => c.iso === isoCode);
+    if (countryInfo) this.dispatchEvent(EVENTS.getSelectCountryEvent(countryInfo.country));
+  };
+
+  flyTo(long, lat) {
+    this.map.flyTo({ center: [long, lat], zoom: 4 });
   }
 }
 

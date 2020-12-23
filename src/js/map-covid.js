@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+import EVENTS from './events';
 
 class MapCovid extends HTMLElement {
   constructor() {
@@ -6,15 +7,18 @@ class MapCovid extends HTMLElement {
 
     this.mapContainer = document.createElement('div');
     this.mapContainer.setAttribute('id', 'map');
-  }
+    this.indicator = 'cases';
 
-  connectedCallback() {
+    window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
+      this.dataStorage = event.detail;
+      console.log(event);
+    });
     this.append(this.mapContainer);
 
     const mapBoxAPIKey = 'pk.eyJ1IjoibGlrdmlkYXMiLCJhIjoiY2tpdnAyODhtM2M2dTMycWpnMXFiYXZwaCJ9.fozESJf22S8KduoAexP0Eg';
 
     mapboxgl.accessToken = mapBoxAPIKey;
-    // eslint-disable-next-line no-unused-vars
+
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v10',
@@ -86,9 +90,17 @@ class MapCovid extends HTMLElement {
             { hover: true },
           );
 
+          const currentCountry = e.features[0].properties;
+          let currentIndicator;
+          this.dataStorage.forEach((data) => {
+            if (data.country === currentCountry.name) {
+              currentIndicator = data[this.indicator];
+            }
+          });
+
           popup
             .setLngLat(e.lngLat)
-            .setHTML(`<div>${e.features[0].properties.name}</div>`)
+            .setHTML(`<div>${currentCountry.name}</div><div>${this.indicator.toUpperCase()}: ${currentIndicator}</div>`)
             .setMaxWidth('300px')
             .addTo(map);
         }
@@ -115,6 +127,27 @@ class MapCovid extends HTMLElement {
           'line-width': 0.5,
         },
       });
+    });
+
+    const flyToCountry = (country) => {
+      let latittude;
+      let longitude;
+      this.dataStorage.forEach((data) => {
+        if (data.country.toLowerCase() === country.toLowerCase()) {
+          latittude = data.info.lat;
+          longitude = data.info.long;
+        }
+      });
+
+      map.flyTo({ center: [longitude, latittude], zoom: 5 });
+    };
+
+    window.addEventListener(EVENTS.UI.tabChange, (event) => {
+      this.indicator = event.detail.value;
+    });
+    window.addEventListener(EVENTS.UI.selectCountry, (event) => {
+      this.selectCountry = event.detail;
+      flyToCountry(this.selectCountry);
     });
   }
 }

@@ -7,8 +7,8 @@ const MARKER_COLORS = {
   recovered: '#50E3C2',
   deaths: '#E3507A',
 };
-const MARKER_STEPS = [0.01, 0.08, 0.2, 0.5, 0.8];
-const MARKER_BASE_SIZE = 4;
+const MARKER_STEPS = [0.01, 0.15, 0.4, 0.8];
+const MARKER_BASE_SIZE = 3.5;
 
 class MapCovid extends HTMLElement {
   constructor() {

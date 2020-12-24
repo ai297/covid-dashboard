@@ -173,18 +173,20 @@
   & > div {
     margin: 1px;
     padding: 2px;
-    flex: 0 0 calc(50% - 2px);
-    max-width: 15rem;
+    // flex: 0 0 calc(50% - 2px);
+    // max-width: 15rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: $content-background;
+    // background-color: $content-background;
     & div:first-child {
       margin: 0 .5em;
+      flex-shrink: 0;
       border-radius: 50%;
     }
     & div:last-child {
       flex: 0 1 auto;
+      overflow: hidden;
     }
   }
 }

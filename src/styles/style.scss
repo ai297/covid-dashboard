@@ -114,6 +114,7 @@ img { line-height: 0; }
 
 @media(min-width: 1600px) {
   html { font-size: 18px; }
+  .chart {height: 15rem; }
 }
 @media(max-width: 900px) {
   footer {
@@ -125,9 +126,12 @@ img { line-height: 0; }
       flex-direction: column;
     }
   }
-  .chart {
-    height: 100%;
-    max-height: 15rem;
+
+  .dashboard__section:not(.dashboard__section--maximized) {
+    .chart {
+      height: 100%;
+      max-height: 15rem;
+    }
   }
 }
 

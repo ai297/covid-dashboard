@@ -22,10 +22,10 @@
     margin: 0 -2px;
     padding: 3px 6px;
     cursor: pointer;
-    color: $color-primary;
+    color: $color-primary-light;
     background-color: $color-primary-light;
-    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
-    border: $light-border;
+    background-image: linear-gradient(180deg, #A1A3A7 0%, #363f49 100%);
+    border: $default-border;
     transition: all .1s ease-in;
 
     &--left {
@@ -35,13 +35,18 @@
     &--right {
     border-radius: 0 20px 20px 0;
     }
+
+    &:hover {
+      background-image: linear-gradient(180deg, $color-primary-light 0%, #363f49 100%);
+    }
   }
   
   input:checked ~ .toggle__label--left, 
   input:not(:checked) ~ .toggle__label--right {
     background-image: none;
     outline: 0;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 2px 4px $color-primary,0 1px 2px rgba(0,0,0,0.05);
+    color: $color-primary;
     background-color:#e0e0e0;
     transition: all .1s ease-in;
     pointer-events: none;

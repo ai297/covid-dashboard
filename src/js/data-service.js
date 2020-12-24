@@ -1,11 +1,11 @@
 import { mapSummaryData, mapDetailData, filterSummaryData } from './data-mapping';
 
-// const SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&sort=cases';
-// const WORLDWIDE_SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=false';
-// const COUNTRY_DETAIL_DATA_URL = 'https://disease.sh/v3/covid-19/historical/{country}?lastdays=360';
-const SUMMARY_DATA_URL = './test-summary.json';
-const WORLDWIDE_SUMMARY_DATA_URL = './test-worldwide-detail.json';
-const COUNTRY_DETAIL_DATA_URL = './test-country-detail.json';
+const SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&sort=cases';
+const WORLDWIDE_SUMMARY_DATA_URL = 'https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=false';
+const COUNTRY_DETAIL_DATA_URL = 'https://disease.sh/v3/covid-19/historical/{country}?lastdays=360';
+// const SUMMARY_DATA_URL = './test-summary.json';
+// const WORLDWIDE_SUMMARY_DATA_URL = './test-worldwide-detail.json';
+// const COUNTRY_DETAIL_DATA_URL = './test-country-detail.json';
 
 function resolveAll(callbacks, ...args) {
   callbacks.forEach((item) => {

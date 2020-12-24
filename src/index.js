@@ -14,6 +14,7 @@ import LastUpdate from './js/last-update-section';
 import AppChart from './js/app-chart';
 import AppTable from './js/app-table';
 import CountryTitle from './js/country-title';
+import MapLegend from './js/map-legend';
 
 window.customElements.define('app-widget', AppWidget);
 window.customElements.define('search-form', SearchForm);
@@ -23,6 +24,7 @@ window.customElements.define('country-flag', CountryFlag);
 window.customElements.define('tab-button', TabButton, { extends: 'label' });
 window.customElements.define('tabs-group', TabsGroup);
 window.customElements.define('switch-btn', SwitchButton, { extends: 'label' });
+window.customElements.define('map-legend', MapLegend);
 window.customElements.define('map-cov', MapCovid);
 window.customElements.define('app-chart', AppChart);
 window.customElements.define('last-update-section', LastUpdate);
@@ -35,7 +37,6 @@ new VirtualKeyboard().addSounds({
   arrowleft: './sounds/arrows.wav',
   arrowright: './sounds/arrows.wav',
   capslock: './sounds/capslock.wav',
-  enter: './sounds/enter.wav',
   shiftleft: './sounds/shift.wav',
   shiftright: './sounds/shift.wav',
   space: './sounds/space.wav',

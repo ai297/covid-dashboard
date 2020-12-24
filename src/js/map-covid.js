@@ -1,18 +1,24 @@
 import EVENTS from './events';
 import MapAdapter from './map-adapter';
+import MapLegend from './map-legend';
 
 const MARKER_COLORS = {
   cases: '#53B9EA',
   recovered: '#50E3C2',
   deaths: '#E3507A',
 };
+const MARKER_STEPS = [0.01, 0.08, 0.2, 0.5, 0.8];
+const MARKER_BASE_SIZE = 4;
 
 class MapCovid extends HTMLElement {
   constructor() {
     super();
 
     this.mapContainer = document.createElement('div');
+    this.legend = new MapLegend();
+    this.legend.className = 'dashboard__section map-legend';
     this.append(this.mapContainer);
+    this.parentElement.append(this.legend);
     this.map = new MapAdapter(this.mapContainer);
 
     window.addEventListener(EVENTS.DATA.showSummaryAll, (event) => {
@@ -53,10 +59,28 @@ class MapCovid extends HTMLElement {
 
   updateValues(value) {
     this.displayValue = value;
-    this.map.updateMarkers(MARKER_COLORS[this.displayValue], this.data, this.getValueFor);
+    const maxVlue = this.data.slice(2).reduce((acc, countryInfo) => {
+      const val = this.getValueFor(countryInfo);
+      return val > acc ? val : acc;
+    }, this.getValueFor(this.data[1]));
+
+    const points = this.data.filter((c) => c.coords).map((countryInfo) => {
+      const radius = (MARKER_STEPS.findIndex((s) => this.getValueFor(countryInfo) < s * maxVlue)
+        + 1) * MARKER_BASE_SIZE;
+      return {
+        long: countryInfo.coords.long,
+        lat: countryInfo.coords.lat,
+        radius: radius || MARKER_BASE_SIZE * (MARKER_STEPS.length + 1),
+      };
+    });
+    this.map.updateMarkers(MARKER_COLORS[this.displayValue], points);
+    const markerValues = MARKER_STEPS.map((v) => v * maxVlue);
+    this.legend.updateLegend(
+      MARKER_COLORS[this.displayValue], MARKER_BASE_SIZE * 2, ...markerValues,
+    );
   }
 
-  getValueFor = (countryInfo) => {
+  getValueFor(countryInfo) {
     const todayField = `today${this.displayValue[0].toUpperCase()}${this.displayValue.slice(1)}`;
     let value = this.isShowAllTime ? countryInfo[this.displayValue]
       : countryInfo[todayField];

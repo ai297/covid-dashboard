@@ -101,9 +101,9 @@ export default class MapAdapter {
     });
   }
 
-  updateMarkers(color, data, valueCallback) {
+  updateMarkers(color, points) {
     if (!this.isLoaded) {
-      this.apdateMarkersAfterLoadCallback = () => this.updateMarkers(color, data, valueCallback);
+      this.apdateMarkersAfterLoadCallback = () => this.updateMarkers(color, points);
       return;
     }
     if (this.map.getLayer(MAP_MARKERS_LAYER)) {
@@ -115,11 +115,11 @@ export default class MapAdapter {
       type: 'circle',
       source: {
         type: 'geojson',
-        data: createGeoJson(data, valueCallback),
+        data: createGeoJson(points),
       },
       paint: {
         'circle-color': color,
-        'circle-opacity': 0.8,
+        'circle-opacity': 0.75,
         'circle-radius': ['get', 'radius'],
       },
     });

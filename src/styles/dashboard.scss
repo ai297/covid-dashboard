@@ -144,15 +144,48 @@
   width: 100%;
 }
 
-.map-controls { 
+.map-controls {
   @include flex-center;
   flex-wrap: wrap;
   flex-direction: row;
-  padding: .6rem 1.9rem; 
+  padding: .6rem 1.9rem;
 
   .tabs-group,
   .toggle-group {
     margin: 0;
+  }
+}
+
+.map-legend {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  max-width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  transform: translateX(-50%);
+
+  & > div {
+    margin: 1px;
+    padding: 2px;
+    flex: 0 0 calc(50% - 2px);
+    max-width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: $content-background;
+    & div:first-child {
+      margin: 0 .5em;
+      border-radius: 50%;
+    }
+    & div:last-child {
+      flex: 0 1 auto;
+    }
   }
 }
 
@@ -189,7 +222,7 @@
     flex-wrap: wrap;
     &__column {
       padding-bottom: 0;
-      
+
       &--widget-column {
         max-width: unset;
         flex: 1 0 50%;

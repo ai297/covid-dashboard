@@ -2,6 +2,8 @@ import Chart from 'chart.js';
 import { getDailyData } from './data-mapping';
 import EVENTS from './events';
 
+Chart.defaults.global.defaultFontColor = '#CBCFD4';
+
 // const BACKGROUND_COLORS = {
 //   cases: 'rgba(54, 162, 235, 0.2)',
 //   recovered: 'rgba(75, 192, 192, 0.2)',
@@ -73,12 +75,21 @@ class AppChart extends HTMLElement {
         },
         scales: {
           xAxes: [{
+            gridLines: {
+              color: 'rgb(203, 207, 212, .2)',
+            },
             type: 'time',
             time: {
               unit: 'month',
+              displayFormats: {
+                month: 'MMM',
+              },
             },
           }],
           yAxes: [{
+            gridLines: {
+              color: 'rgb(203, 207, 212, .2)',
+            },
             ticks: {
               beginAtZero: true,
             },

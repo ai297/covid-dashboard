@@ -1,0 +1,61 @@
+@import './constants.scss';
+
+.tabs-group {
+  display: block;
+  margin: 0 auto;
+  padding: 0.2rem;
+  
+  .tabs-group__button {
+
+    input {
+      display: none;
+    }
+
+    div {
+      display: inline-block;
+      margin: 0 -2px;
+      padding: 3px 11px;
+      cursor: pointer;
+      color: $color-primary-light;
+      background-color: $color-primary-light;
+      background-image: linear-gradient(180deg, #A1A3A7 0%, #363f49 100%);
+      border: $default-border;
+      transition: all 0.2s ease-in;
+    }
+    
+    input:checked ~ div {
+      background-image: none;
+      outline: 0;
+      box-shadow: inset 0 2px 4px $color-primary,0 1px 2px rgba(0,0,0,0.05);
+      background-color:#e0e0e0;
+      color: $color-primary;
+    }
+
+    div:hover {
+      color: $color-primary;
+    }
+
+    &--cases {
+    input:checked ~ div { background-color: $color-cases;}
+    div:hover { background-image: linear-gradient(180deg, $color-primary-light 0%, $color-cases 100%);}
+    }
+
+    &--recovered {
+      input:checked ~ div { background-color: $color-recovered;}
+      div:hover { background-image: linear-gradient(180deg, $color-primary-light 0%, $color-recovered 100%);}
+    }
+
+    &--deaths {
+      input:checked ~ div { background-color: $color-deaths;}
+      div:hover { background-image: linear-gradient(180deg, $color-primary-light 0%, $color-deaths 100%);}
+    }
+
+    &:first-child div{
+      border-radius: 20px 0 0 20px;
+    }
+  
+    &:last-child div {
+      border-radius: 0 20px 20px 0;
+    }
+  }
+}

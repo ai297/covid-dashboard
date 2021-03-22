@@ -1,5 +1,145 @@
+@import './constants.scss';
+
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     &:active, &:focus { outline: none; }
 }
+
+html {
+  font-family: $primary-font;
+  font-size: 14px;
+  color: $main-font-color;
+}
+
+body {
+  background-color: $color-primary-dark;
+}
+
+main {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+footer {
+  position: relative;
+  height: $footer-height;
+  margin-top: -$footer-height;
+  padding: $base-padding-size;
+  @include flex-center;
+  color: $dark-font-color;
+  background-color: $content-background;
+  z-index: 2;
+}
+
+h1, h2, h3 {
+  color: $headers-color;
+  font-family: $headers-font;
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+h1 { font-size: 1.65rem; }
+h2 { font-size: 1.6rem; }
+
+a {
+  color: mix($dark-font-color, $main-font-color, 50%);
+  text-decoration: none;
+  transition: all .3s;
+  display: inline-block;
+}
+a:visited { color: $dark-font-color; }
+a:hover, a:focus {
+  color: $main-font-color;
+  text-decoration: underline;
+}
+
+img { line-height: 0; }
+
+.custom-scrollbar {
+  &::-webkit-scrollbar { width: .5rem; }
+  &::-webkit-scrollbar-track { background-color: transparent; }
+  &::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background-color: $main-border-color;
+  }
+}
+
+.footer {
+  &__githubs, &__year { flex: 1 1 45%; }
+  &__year { text-align: right; }
+  &__rsschool-logo {
+    flex: 0 0 auto;
+    min-width: 10%;
+    text-align: center;
+    svg {
+      height: 2rem;
+    }
+  }
+}
+.github-link {
+  margin: 0.2rem .5rem;
+  &::before {
+    content: url("data:image/svg+xml,%3Csvg version='1.1' viewBox='0 0 11.49 11.21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m5.75 0c-3.173 0-5.746 2.573-5.746 5.747 0 2.539 1.646 4.693 3.93 5.453 0.2875 0.05256 0.3923-0.1249 0.3923-0.2773 0-0.1365-0.0049-0.4978-0.0078-0.9772-1.598 0.3471-1.936-0.7705-1.936-0.7705-0.2614-0.6639-0.6382-0.8407-0.6382-0.8407-0.5218-0.3563 0.03951-0.3492 0.03951-0.3492 0.5768 0.04057 0.8802 0.5923 0.8802 0.5923 0.5126 0.8781 1.345 0.6244 1.673 0.4773 0.05221-0.3711 0.2007-0.6244 0.3648-0.768-1.276-0.1453-2.618-0.6382-2.618-2.84 0-0.6276 0.224-1.14 0.5916-1.542-0.05927-0.1453-0.2565-0.7295 0.05644-1.521 0 0 0.4822-0.1545 1.58 0.5888 0.4583-0.1274 0.95-0.1909 1.439-0.1933 0.4882 0.0025 0.9797 0.06597 1.439 0.1933 1.097-0.7433 1.579-0.5888 1.579-0.5888 0.3136 0.7913 0.1164 1.375 0.0575 1.521 0.3683 0.4018 0.5906 0.9144 0.5906 1.542 0 2.208-1.344 2.693-2.624 2.836 0.206 0.1774 0.3898 0.5281 0.3898 1.064 0 0.768-0.0071 1.388-0.0071 1.576 0 0.1538 0.1037 0.3327 0.3951 0.2766 2.282-0.7616 3.927-2.914 3.927-5.452 0-3.174-2.573-5.747-5.747-5.747' fill='%23757c83'/%3E%3C/svg%3E%0A");
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 4px;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+}
+.github-link:hover::before {
+  content: url("data:image/svg+xml,%3Csvg version='1.1' viewBox='0 0 11.49 11.21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m5.75 0c-3.173 0-5.746 2.573-5.746 5.747 0 2.539 1.646 4.693 3.93 5.453 0.2875 0.05256 0.3923-0.1249 0.3923-0.2773 0-0.1365-0.0049-0.4978-0.0078-0.9772-1.598 0.3471-1.936-0.7705-1.936-0.7705-0.2614-0.6639-0.6382-0.8407-0.6382-0.8407-0.5218-0.3563 0.03951-0.3492 0.03951-0.3492 0.5768 0.04057 0.8802 0.5923 0.8802 0.5923 0.5126 0.8781 1.345 0.6244 1.673 0.4773 0.05221-0.3711 0.2007-0.6244 0.3648-0.768-1.276-0.1453-2.618-0.6382-2.618-2.84 0-0.6276 0.224-1.14 0.5916-1.542-0.05927-0.1453-0.2565-0.7295 0.05644-1.521 0 0 0.4822-0.1545 1.58 0.5888 0.4583-0.1274 0.95-0.1909 1.439-0.1933 0.4882 0.0025 0.9797 0.06597 1.439 0.1933 1.097-0.7433 1.579-0.5888 1.579-0.5888 0.3136 0.7913 0.1164 1.375 0.0575 1.521 0.3683 0.4018 0.5906 0.9144 0.5906 1.542 0 2.208-1.344 2.693-2.624 2.836 0.206 0.1774 0.3898 0.5281 0.3898 1.064 0 0.768-0.0071 1.388-0.0071 1.576 0 0.1538 0.1037 0.3327 0.3951 0.2766 2.282-0.7616 3.927-2.914 3.927-5.452 0-3.174-2.573-5.747-5.747-5.747' fill='%23CBCFD4'/%3E%3C/svg%3E%0A");
+}
+
+.cases, .recovered, .deaths {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+.cases { color: $color-cases; }
+.recovered { color: $color-recovered; }
+.deaths { color: $color-deaths; }
+
+.chart {
+  display: block;
+  width: 100%;
+  height: 10rem;
+  position: relative;
+}
+
+.widget-container--chart {
+  min-height: auto;
+}
+
+@media(min-width: 1600px) {
+  html { font-size: 18px; }
+  .chart {height: 15rem; }
+}
+@media(max-width: 900px) {
+  footer {
+    margin-top: 0;
+    height: 80px;
+
+    .footer__githubs {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .dashboard__section:not(.dashboard__section--maximized) {
+    .chart {
+      height: 100%;
+      max-height: 15rem;
+    }
+  }
+}
+
+@import './dashboard.scss';
+@import './search-form.scss';
+@import './countries-list.scss';
+@import './tabs-group.scss';
+@import './mapbox-gl.scss';
+@import './switch-button.scss';
+@import './map-custom-styles.scss';
+@import '../keyboard/keyboard.scss';

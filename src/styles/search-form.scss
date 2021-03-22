@@ -1,0 +1,48 @@
+@import './constants.scss';
+
+.search-form {
+  position: relative;
+  width: calc(100% - 2.5rem);
+  border-radius: $default-border-radius;
+  overflow: hidden;
+
+  & > input {
+    position: relative;
+    padding: 0 1.5rem 0 .5rem;
+    width: 100%;
+    color: $color-primary-dark;
+    font-family: $primary-font;
+    font-size: 1rem;
+    line-height: 2rem;
+    background-color: $color-primary-light;
+    border: none;
+    opacity: .65;
+    z-index: 1;
+    transition: all .3s;
+
+    &:focus { opacity: 1; }
+
+    &::placeholder { color: $color-primary; }
+  }
+
+  & > button {
+    position: absolute;
+    width: 1.5rem;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 4px;
+    color: $color-primary;
+    border: none;
+    background: none;
+    z-index: 2;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+      color: $color-primary-dark;
+      transform: scale(1.1);
+    }
+    &:active { transform: translateY(5%); }
+  }
+}

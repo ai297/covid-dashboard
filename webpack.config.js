@@ -18,7 +18,7 @@ module.exports = {
     filename: 'bundle.js',
     path: BUILD_PATH,
   },
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'style.css',
